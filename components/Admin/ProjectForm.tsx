@@ -1,4 +1,5 @@
 // src/components/ProjectForm.tsx
+import Image from "next/image";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -80,10 +81,12 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         className="border p-2 rounded"
       />
       {bg_imgPreview && (
-        <img
+        <Image
           src={bg_imgPreview}
           alt="bg_img Preview"
           className="w-32 h-32 object-cover mt-2"
+          width={128}
+          height={128}
         />
       )}
 
@@ -99,10 +102,12 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         className="border p-2 rounded"
       />
       {devicePreview && (
-        <img
+        <Image
           src={devicePreview}
           alt="Device Preview"
           className="w-32 h-32 object-cover mt-2"
+          width={128}
+          height={128}
         />
       )}
 
@@ -120,11 +125,13 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
       />
       <div className="flex gap-2 mt-2">
         {featuredImagesPreviews.map((src, index) => (
-          <img
+          <Image
             key={index}
             src={src}
             alt={`Featured Preview ${index}`}
             className="w-32 h-32 object-cover"
+            width={128}
+            height={128}
           />
         ))}
       </div>

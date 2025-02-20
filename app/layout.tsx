@@ -6,15 +6,6 @@ import "./globals.css";
 import AuthInitializer from "@/components/AuthInitializer";
 import Footer from "@/components/layout/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 const eczar = Eczar({
   weights: ["400", "500", "600", "700"],
   subsets: ["latin"],

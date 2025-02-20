@@ -20,7 +20,7 @@ export default function ProjectsList(props: Props) {
       console.log(projectsData);
     }
     loadProjects();
-  }, []);
+  }, [props.limit]);
 
   return (
     <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 bg-black py-12">

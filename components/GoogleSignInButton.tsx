@@ -1,7 +1,7 @@
 // components/GoogleSignInButton.tsx
 "use client";
 import { RootState } from "@/store";
-import { clearUser, setUser } from "@/store/slices/authSlice";
+import { setUser } from "@/store/slices/authSlice";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
