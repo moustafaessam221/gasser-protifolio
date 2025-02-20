@@ -1,0 +1,25 @@
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0);
+    visibility: visible;
+  }
+  90% {
+    transform: translateX(calc(25vw + 100%)) translateY(calc(-25vh - 100%));
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    visibility: visible;
+  }
+}
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+.fly {
+  position: absolute;
+  animation: fly 2s normal infinite;
+}

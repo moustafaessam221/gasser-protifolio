@@ -1,6 +1,10 @@
+import NavigationBar from "@/components/layout/NavigationBar";
+import ReduxProvider from "@/components/ReduxProvider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Eczar, Work_Sans } from "next/font/google";
 import "./globals.css";
+import AuthInitializer from "@/components/AuthInitializer";
+import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,6 +13,15 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+const eczar = Eczar({
+  weights: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
+
+const workSans = Work_Sans({
+  weights: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -25,9 +38,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`font-eczar ${eczar.className} ${workSans.className} antialiased overflow-x-hidden`}
       >
-        {children}
+        <ReduxProvider>
+          <AuthInitializer />
+          <NavigationBar />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

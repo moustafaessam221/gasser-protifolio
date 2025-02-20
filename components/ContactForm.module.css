@@ -1,0 +1,27 @@
+.container {
+  @apply flex flex-col items-center justify-center h-auto font-sans mb-12;
+}
+
+.heading {
+  @apply text-4xl font-semibold mb-8 px-3;
+}
+
+.form {
+  @apply mt-3;
+}
+
+.inputContainer {
+  @apply flex flex-wrap mb-4;
+}
+
+.input {
+  @apply appearance-none block w-full bg-gray-400 bg-opacity-20 font-bold text-black border border-gray-200 py-3 px-4 leading-tight focus:outline-none focus:bg-white h-20 rounded-3xl placeholder:text-xl placeholder:font-semibold placeholder:text-black;
+}
+
+.textarea {
+  @apply h-48 resize-none;
+}
+
+.button {
+  @apply bg-transparent hover:bg-black text-black font-semibold hover:text-white py-2 px-4 border-4 border-black hover:border-transparent rounded;
+}

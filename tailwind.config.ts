@@ -12,6 +12,13 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      dropShadow: {
+        "custom-white": "0px 0px 120px rgba(255, 255, 255, 0.50)",
+      },
+      fontFamily: {
+        eczar: ["Eczar", "serif"],
+        workSans: ["Work Sans", "sans-serif"],
+      },
     },
   },
   plugins: [],

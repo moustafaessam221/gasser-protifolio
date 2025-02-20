@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #bbb6b6;
   --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: black;
   }
 }
 
@@ -18,4 +18,24 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  @apply font-eczar;
+}
+
+.responsive-padding {
+  @apply px-2 md:px-12 lg:px-20;
+}
+.secondry-button {
+  @apply px-4 py-4 font-semibold w-56;
+}
+button {
+  @apply font-workSans;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
