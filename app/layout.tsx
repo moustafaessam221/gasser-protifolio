@@ -1,10 +1,10 @@
+import AuthInitializer from "@/components/AuthInitializer";
+import Footer from "@/components/layout/Footer";
 import NavigationBar from "@/components/layout/NavigationBar";
 import ReduxProvider from "@/components/ReduxProvider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Eczar, Work_Sans } from "next/font/google";
+import { Eczar, Work_Sans } from "next/font/google";
 import "./globals.css";
-import AuthInitializer from "@/components/AuthInitializer";
-import Footer from "@/components/layout/Footer";
 
 const eczar = Eczar({
   weights: ["400", "500", "600", "700"],
