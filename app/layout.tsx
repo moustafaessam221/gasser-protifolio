@@ -7,12 +7,10 @@ import { Eczar, Work_Sans } from "next/font/google";
 import "./globals.css";
 
 const eczar = Eczar({
-  weights: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
 const workSans = Work_Sans({
-  weights: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
