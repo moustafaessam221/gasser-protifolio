@@ -73,7 +73,6 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         background image
       </label>
       <input
-        name="bg_img"
         type="file"
         accept="image/*"
         {...register("bg_img")}
@@ -94,7 +93,6 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         Device
       </label>
       <input
-        name="device"
         type="file"
         accept="image/*"
         {...register("device")}
@@ -115,7 +113,6 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         Featured Images
       </label>
       <input
-        name="featuredImages"
         type="file"
         accept="image/*"
         multiple
@@ -126,7 +123,7 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
       <div className="flex gap-2 mt-2">
         {featuredImagesPreviews.map((src, index) => (
           <Image
-            key={index}
+            key={src}
             src={src}
             alt={`Featured Preview ${index}`}
             className="w-32 h-32 object-cover"
