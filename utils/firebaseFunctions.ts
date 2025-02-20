@@ -50,13 +50,15 @@ export async function fetchProjects(maxProjects?: number): Promise<Project[]> {
 }
 
 // upload an img with the data
-export const uploadImage = async (file) => {
+
+export const uploadImage = async (file: File) => {
   const imageRef = ref(storage, `images/${file.name}`);
   await uploadBytes(imageRef, file);
   return getDownloadURL(imageRef);
 };
+
 // upload a project
-export const addProjectToFirestore = async (projectData) => {
+export const addProjectToFirestore = async (projectData: Project) => {
   await addDoc(collection(db, "projects"), projectData);
 };
 
@@ -65,7 +67,7 @@ export async function deleteProjectById(
   projectId: string | number
 ): Promise<boolean> {
   try {
-    const projectDocRef = doc(db, "projects", projectId);
+    const projectDocRef = doc(db, "projects", String(projectId));
     await deleteDoc(projectDocRef);
     console.log(`Project ${projectId} deleted successfully!`);
     return true;

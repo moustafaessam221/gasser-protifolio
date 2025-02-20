@@ -4,6 +4,7 @@
 import { SubmitHandler } from "react-hook-form";
 import ProjectForm from "./ProjectForm";
 import { uploadImage, addProjectToFirestore } from "@/utils/firebaseFunctions";
+import { v4 as uuidv4 } from "uuid";
 
 interface FormValues {
   title: string;
@@ -24,6 +25,7 @@ export default function AddProject() {
       );
 
       await addProjectToFirestore({
+        id: uuidv4(),
         title: data.title,
         description: data.description,
         bg_img: bg_imgUrl,
