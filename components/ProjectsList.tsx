@@ -5,6 +5,7 @@ import ProjectCard from "./ProjectCard";
 import { Project } from "@/types/project";
 import { fetchProjects } from "@/utils/firebaseFunctions";
 import Loading from "@/app/loading";
+import Link from "next/link";
 
 interface Props {
   limit: number;
@@ -26,9 +27,12 @@ export default function ProjectsList(props: Props) {
     <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 bg-black py-12">
       <div className="flex flex-wrap lg:flex-nowrap gap-16 items-center mb-4">
         <h1 className="text-4xl font-semibold text-white">Featured Work</h1>
-        <button className="secondry-button border-white border-2 text-white">
+        <Link
+          href="/work"
+          className="py-[15px] px-[84px] border-white border-[5px] font-workSans text-white text-xl"
+        >
           View All Work
-        </button>
+        </Link>
       </div>
       <div className="flex flex-col gap-14 mb-12">
         {projects.length > 0 ? (

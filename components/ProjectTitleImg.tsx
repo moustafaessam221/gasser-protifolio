@@ -35,7 +35,7 @@ const ProjectTitleImg = ({ bgimg, device }: Props) => {
       ) : (
         <motion.div
           initial={{ x: 150, y: 200 }}
-          whileHover={{ y: 0 }}
+          whileHover={{ y: 120 }}
           className="flex justify-center items-center h-full"
         >
           <Image

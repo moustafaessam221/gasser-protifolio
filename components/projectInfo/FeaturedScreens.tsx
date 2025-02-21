@@ -65,58 +65,68 @@ const FeaturedScreens = ({ featured_images }: Props) => {
   }
 
   return (
-    <div className="text-white relative h-[70vh] ">
-      <button
-        onClick={handleLeftClick}
-        className="absolute left-9 top-1/2 lg:text-white text-black border rounded-full lg:bg-black/50 bg-white/75 text-4xl lg:text-6xl z-10"
-      >
-        <MdKeyboardArrowLeft />
-      </button>
-      <button
-        onClick={handleRightClick}
-        className="absolute right-9 top-1/2 lg:text-white text-black border rounded-full lg:bg-black/50 bg-white/75 text-4xl lg:text-6xl z-10"
-      >
-        <MdKeyboardArrowRight />
-      </button>
-      <div className="grid grid-cols-3 gap-4 items-center place-items-center h-full">
-        {/* Previous Image */}
-        <div className="hidden md:col-span-1 md:block">
-          <Image
-            key={prevImgIndex}
-            src={imagesArr[prevImgIndex]}
-            alt="left"
-            className="brightness-50"
-            layout="responsive"
-            width={400}
-            height={400}
-          />
-        </div>
+    <>
+      <h2 className="text-[32px] font-semibold text-center text-white my-[70px]">
+        Featured Screens
+      </h2>
+      <div className="text-white relative h-[70vh] ">
+        <button
+          onClick={handleLeftClick}
+          className="absolute left-9 top-1/2 lg:text-white text-black border rounded-full lg:bg-black/50 bg-white/75 text-4xl lg:text-6xl z-20"
+        >
+          <MdKeyboardArrowLeft />
+        </button>
+        <button
+          onClick={handleRightClick}
+          className="absolute right-9 top-1/2 lg:text-white text-black border rounded-full lg:bg-black/50 bg-white/75 text-4xl lg:text-6xl z-20"
+        >
+          <MdKeyboardArrowRight />
+        </button>
+        {/* Image Container */}
+        <div className="grid grid-cols-3 gap-4 items-center place-items-center h-full duration-500">
+          {/* Previous Image */}
+          <div className="hidden md:col-span-1 md:block duration-500 z-0">
+            <Image
+              key={prevImgIndex}
+              src={imagesArr[prevImgIndex]}
+              alt="left"
+              className="brightness-50"
+              layout="responsive"
+              width={400}
+              height={400}
+            />
+          </div>
 
-        {/* Current Image */}
-        <div ref={mainImgRef} className="col-span-3 md:col-span-1">
-          <Image
-            key={currentImageIndex}
-            src={imagesArr[currentImageIndex]}
-            alt="center"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
+          {/* Current Image */}
+          <div
+            ref={mainImgRef}
+            className="col-span-3 md:col-span-1 duration-500 z-10 "
+          >
+            <Image
+              key={currentImageIndex}
+              src={imagesArr[currentImageIndex]}
+              alt="center"
+              fill
+              objectFit="contain"
+              className="drop-shadow-custom-white"
+            />
+          </div>
 
-        {/* Next Image */}
-        <div className="hidden md:col-span-1  md:block">
-          <Image
-            key={nextImgIndex}
-            src={imagesArr[nextImgIndex]}
-            layout="responsive"
-            width={400}
-            height={400}
-            alt="right"
-            className="brightness-50"
-          />
+          {/* Next Image */}
+          <div className="hidden md:col-span-1 md:block duration-500 z-0">
+            <Image
+              key={nextImgIndex}
+              src={imagesArr[nextImgIndex]}
+              layout="responsive"
+              width={400}
+              height={400}
+              alt="right"
+              className="brightness-50"
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

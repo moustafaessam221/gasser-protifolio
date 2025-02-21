@@ -20,7 +20,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   @apply font-eczar;
 }
-
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  scroll-behavior: smooth;
+}
 .responsive-padding {
   @apply px-2 md:px-12 lg:px-20;
 }
@@ -38,4 +43,12 @@ button {
   to {
     opacity: 1;
   }
+}
+
+.clip-path-from-right {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.clip-path-to-right {
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
 }

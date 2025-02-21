@@ -19,7 +19,7 @@ const ProjectHero = (props: Props) => {
         <h2 className="text-3xl font-semibold">{props.title}</h2>
         <p className="text-2xl leading-9 w-[700px]">{props.description}</p>
       </div>
-      <div className="w-full h-full">
+      <div className="w-full h-full rounded-[30px] overflow-hidden max-w-[650px]">
         <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
       </div>
     </div>
