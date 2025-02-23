@@ -1,47 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import ProjectCard from "./ProjectCard";
+import Loading from "@/app/loading";
 import { Project } from "@/types/project";
 import { fetchProjects } from "@/utils/firebaseFunctions";
-import Loading from "@/app/loading";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import ProjectCard from "./ProjectCard";
 
 interface Props {
   limit: number;
 }
 
-export default function ProjectsList(props: Props) {
-  const [projects, setProjects] = useState<Project[]>([]);
+export default function ProjectsList(props: Readonly<Props>) {
+  const { isPending, data, error } = useQuery({
+    queryKey: ["projects", props.limit],
+    queryFn: () => fetchProjects(props.limit),
+  });
 
-  useEffect(() => {
-    async function loadProjects() {
-      const projectsData = await fetchProjects(props.limit);
-      setProjects(projectsData);
-      console.log(projectsData);
-    }
-    loadProjects();
-  }, [props.limit]);
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return <div>Error fetching projects</div>;
+  }
 
   return (
     <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 bg-black py-12">
-      <div className="flex flex-wrap lg:flex-nowrap gap-16 items-center mb-4">
-        <h1 className="text-4xl font-semibold text-white">Featured Work</h1>
+      <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-16 items-center mb-4">
+        <h1 className="text-2xl lg:text-4xl font-semibold text-white">
+          Featured Work
+        </h1>
         <Link
           href="/work"
-          className="py-[15px] px-[84px] border-white border-[5px] font-workSans text-white text-xl"
+          className="py-2 lg:py-[15px] px-6 lg:px-[84px] border-white border-[3px] lg:border-[5px] font-workSans text-white text-lg lg:text-xl"
         >
           View All Work
         </Link>
       </div>
       <div className="flex flex-col gap-14 mb-12">
-        {projects.length > 0 ? (
-          projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))
-        ) : (
-          <Loading />
-        )}
+        {data.map((project: Project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
       </div>
     </div>
   );

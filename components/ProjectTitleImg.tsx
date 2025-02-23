@@ -9,46 +9,38 @@ type Props = {
 const ProjectTitleImg = ({ bgimg, device }: Props) => {
   if (!bgimg || !device) return null;
 
-  // Check if the screen is small
-  const isSmallScreen =
-    typeof window !== "undefined" && window.innerWidth <= 480;
-
   return (
-    <div
-      className="w-full h-full relative overflow-hidden bg-no-repeat bg-center bg-cover"
-      style={{
-        backgroundImage: `url(${bgimg})`,
-      }}
-    >
-      {isSmallScreen ? (
-        <div className="flex justify-center items-center h-full">
-          <Image
-            placeholder="blur"
-            blurDataURL={device}
-            src={device}
-            alt="Device"
-            width={250}
-            height={500}
-            className="w-auto h-[300px] sm:h-[220px] sm:w-[220px] md:h-[250px] md:w-[250px] lg:h-[300px] lg:w-[300px] xl:h-[350px] xl:w-[350px] object-contain"
-          />
-        </div>
-      ) : (
-        <motion.div
-          initial={{ x: 150, y: 200 }}
-          whileHover={{ y: 120 }}
-          className="flex justify-center items-center h-full"
-        >
-          <Image
-            placeholder="blur"
-            blurDataURL={device}
-            src={device}
-            alt="Device"
-            width={250}
-            height={500}
-            className="w-auto h-[300px] sm:h-[220px] sm:w-[220px] md:h-[250px] md:w-[250px] lg:h-[300px] lg:w-[300px] xl:h-[350px] xl:w-[350px] object-contain"
-          />
-        </motion.div>
-      )}
+    <div className="relative overflow-hidden group max-h-[414px]">
+      <Image
+        src={bgimg}
+        alt="Picture of the background"
+        sizes="100vw"
+        style={{
+          objectFit: "cover",
+          width: "100%",
+          height: "auto",
+          zIndex: -1,
+        }}
+        width={500}
+        height={300}
+      />
+      <motion.div
+        className="absolute top-3/10 group-hover:top-2/10 transition-all duration-200 ease-in-out max-w-[274px] max-h-[504px]"
+        style={{ right: "9%" }}
+      >
+        <Image
+          src={device}
+          alt="Picture of the device"
+          sizes="100vw"
+          style={{
+            width: "100%", // Set width to 100% for responsiveness
+            height: "auto", // Maintain aspect ratio
+            zIndex: 1,
+          }}
+          width={327}
+          height={434}
+        />
+      </motion.div>
     </div>
   );
 };

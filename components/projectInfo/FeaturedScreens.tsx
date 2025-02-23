@@ -11,8 +11,8 @@ type Props = {
 const FeaturedScreens = ({ featured_images }: Props) => {
   const [imagesArr, setImagesArr] = useState(featured_images);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [prevImgIndex, setPrevImgIndex] = useState(featured_images.length - 1);
-  const [nextImgIndex, setNextImgIndex] = useState(1);
+  // const [prevImgIndex, setPrevImgIndex] = useState(featured_images.length - 1);
+  // const [nextImgIndex, setNextImgIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const mainImgRef = useRef<HTMLDivElement>(null);
 
@@ -20,8 +20,8 @@ const FeaturedScreens = ({ featured_images }: Props) => {
     setIsLoading(true);
     setImagesArr(featured_images);
     setCurrentImageIndex(0);
-    setPrevImgIndex(featured_images.length - 1);
-    setNextImgIndex(1);
+    // setPrevImgIndex(featured_images.length - 1);
+    // setNextImgIndex(1);
     console.log("featured_images", featured_images);
     setIsLoading(false);
   }, [featured_images]);
@@ -30,20 +30,20 @@ const FeaturedScreens = ({ featured_images }: Props) => {
     const newCurrentIndex =
       (currentImageIndex - 1 + featured_images.length) % featured_images.length;
     setCurrentImageIndex(newCurrentIndex);
-    setPrevImgIndex(
-      (newCurrentIndex - 1 + featured_images.length) % featured_images.length
-    );
-    setNextImgIndex((newCurrentIndex + 1) % featured_images.length);
+    // setPrevImgIndex(
+    //   (newCurrentIndex - 1 + featured_images.length) % featured_images.length
+    // );
+    // setNextImgIndex((newCurrentIndex + 1) % featured_images.length);
     handleClick();
   }
 
   function handleRightClick() {
     const newCurrentIndex = (currentImageIndex + 1) % featured_images.length;
     setCurrentImageIndex(newCurrentIndex);
-    setPrevImgIndex(
-      (newCurrentIndex - 1 + featured_images.length) % featured_images.length
-    );
-    setNextImgIndex((newCurrentIndex + 1) % featured_images.length);
+    // setPrevImgIndex(
+    //   (newCurrentIndex - 1 + featured_images.length) % featured_images.length
+    // );
+    // setNextImgIndex((newCurrentIndex + 1) % featured_images.length);
     handleClick();
   }
 
@@ -69,7 +69,7 @@ const FeaturedScreens = ({ featured_images }: Props) => {
       <h2 className="text-[32px] font-semibold text-center text-white my-[70px]">
         Featured Screens
       </h2>
-      <div className="text-white relative h-[70vh] ">
+      <div className="text-white relative h-[70vh] duration-500">
         <button
           onClick={handleLeftClick}
           className="absolute left-9 top-1/2 lg:text-white text-black border rounded-full lg:bg-black/50 bg-white/75 text-4xl lg:text-6xl z-20"
@@ -85,35 +85,35 @@ const FeaturedScreens = ({ featured_images }: Props) => {
         {/* Image Container */}
         <div className="grid grid-cols-3 gap-4 items-center place-items-center h-full duration-500">
           {/* Previous Image */}
-          <div className="hidden md:col-span-1 md:block duration-500 z-0">
+          {/* <div className="hidden md:col-span-1 md:block duration-500 z-0">
             <Image
               key={prevImgIndex}
               src={imagesArr[prevImgIndex]}
               alt="left"
-              className="brightness-50"
+              className="brightness-50 hidden"
               layout="responsive"
               width={400}
               height={400}
             />
-          </div>
+          </div> */}
 
           {/* Current Image */}
-          <div
+          {/* <div
             ref={mainImgRef}
             className="col-span-3 md:col-span-1 duration-500 z-10 "
-          >
-            <Image
-              key={currentImageIndex}
-              src={imagesArr[currentImageIndex]}
-              alt="center"
-              fill
-              objectFit="contain"
-              className="drop-shadow-custom-white"
-            />
-          </div>
+          > */}
+          <Image
+            key={currentImageIndex}
+            src={imagesArr[currentImageIndex]}
+            alt="center"
+            fill
+            objectFit="contain"
+            className="drop-shadow-custom-white"
+          />
+          {/* </div> */}
 
           {/* Next Image */}
-          <div className="hidden md:col-span-1 md:block duration-500 z-0">
+          {/* <div className="hidden md:col-span-1 md:block duration-500 z-0">
             <Image
               key={nextImgIndex}
               src={imagesArr[nextImgIndex]}
@@ -121,9 +121,9 @@ const FeaturedScreens = ({ featured_images }: Props) => {
               width={400}
               height={400}
               alt="right"
-              className="brightness-50"
+              className="brightness-50 hidden"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

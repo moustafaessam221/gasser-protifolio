@@ -5,6 +5,7 @@ import ReduxProvider from "@/components/ReduxProvider";
 import type { Metadata } from "next";
 import { Eczar, Work_Sans } from "next/font/google";
 import "./globals.css";
+import QueryProvider from "@/utils/QueryProvider";
 
 const eczar = Eczar({
   subsets: ["latin"],
@@ -27,13 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-eczar ${eczar.className} ${workSans.className} antialiased overflow-x-hidden`}
+        className={`font-eczar ${eczar.className} ${workSans.className} antialiased overflow-x-hidden border-x-4 border-black`}
       >
         <ReduxProvider>
-          <AuthInitializer />
-          <NavigationBar />
-          {children}
-          <Footer />
+          <QueryProvider>
+            <AuthInitializer />
+            <NavigationBar />
+            {children}
+            <Footer />
+          </QueryProvider>
         </ReduxProvider>
       </body>
     </html>

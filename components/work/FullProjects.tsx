@@ -1,29 +1,30 @@
 "use client";
-import { Project } from "@/types/project";
+import Loading from "@/app/loading";
 import { fetchProjects } from "@/utils/firebaseFunctions";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import ProjectCard from "../ProjectCard";
 
 const FullProjects = () => {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const { data, isPending, error } = useQuery({
+    queryKey: ["projects"],
+    queryFn: () => fetchProjects(),
+  });
 
-  useEffect(() => {
-    async function loadProjects() {
-      const projectsData = await fetchProjects();
-      setProjects(projectsData);
-    }
-    loadProjects();
-  }, []);
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (error) {
+    console.error("Error fetching projects:", error);
+    return <div>Error fetching projects</div>;
+  }
+
   return (
     <div>
       <div className="flex flex-col gap-14 mb-12">
-        {projects.length > 0 ? (
-          projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+        {data.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
       </div>
     </div>
   );
