@@ -15,17 +15,17 @@ export default function ProjectCard({
       key={project.id}
       className="flex flex-col-reverse lg:flex-row h-auto lg:max-h-[414px] w-full mx-auto justify-between mb-4 bg-white rounded-[10px] md:rounded-[20px] lg:rounded-[30px] font-workSans hover:drop-shadow-custom-white transition-all duration-300 overflow-hidden"
     >
-      <div className="relative w-full lg:w-auto max-w-[650px] max-h-[414px] p-4 xl:ml-[114px] flex flex-col">
-        <h2 className="text-2xl xl:text-[32px] font-semibold mb-2 mt-4 xl:mt-[48px]">
+      <div className="relative w-full lg:w-auto max-w-[650px] max-h-[414px] flex flex-col justify-between py-[62px] pl-[62px]">
+        <h2 className="text-2xl xl:text-[32px] font-semibold">
           {project.title}
         </h2>
-        <p className="mb-4 text-lg block lg:hidden xl:block lg:text-xl font-normal leading-7 lg:leading-9 lg:line-clamp-1 xl:line-clamp-none">
+        <p className="text-lg block lg:hidden xl:block lg:text-xl font-normal leading-7 lg:leading-9 lg:line-clamp-1 xl:line-clamp-none">
           {project.description}
         </p>
-        <p className="mb-4 text-lg hidden lg:block xl:hidden lg:text-xl font-normal">
+        <p className="text-lg hidden lg:block xl:hidden lg:text-xl font-normal">
           {trancatedText}
         </p>
-        <div className="absolute bottom-[81px] font-semibold cursor-pointer hidden lg:block text-lg xl:text-2xl">
+        <div className="font-semibold cursor-pointer hidden lg:block text-lg xl:text-2xl">
           View
         </div>
       </div>

@@ -1,27 +1,26 @@
 "use client";
 import Image from "next/image";
-import HomeImg from "@/public/flyingImages/HeroImg.png";
+import HomeImg from "@/public/images/test_home.svg";
 import { motion } from "framer-motion";
 
 const SideImage = () => {
   return (
     <motion.div
-      className="-z-50 absolute right-0 top-0 h-full w-[1111px] hidden lg:block "
+      className="-z-50 absolute right-[150px] top-[150px] h-full w-full hidden lg:block "
       animate={{
-        y: [0, -20, 0], // Moves the image up by 20px and back to the original position
+        y: [0, -20, 0],
       }}
       transition={{
-        duration: 2, // Duration of the animation cycle
-        repeat: Infinity, // Repeat the animation indefinitely
-        repeatType: "loop", // Loop the animation
-        ease: "easeInOut", // Easing function
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "easeInOut",
       }}
     >
       <Image
         src={HomeImg}
         alt="Flying Pages"
-        className="w-full h-full object-cover rotate-[40deg]"
-        fill
+        className="w-full h-full object-cover scale-125"
         priority
       />
     </motion.div>

@@ -21,7 +21,7 @@ export default function ContactForm() {
   const onSubmit = handleSubmit((data) => (console.log(data), reset()));
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="contact_me">
       <div className="w-full max-w-2xl">
         <h1 className={styles.heading}>Let&apos;s work together</h1>
         <form className={styles.form} onSubmit={onSubmit}>

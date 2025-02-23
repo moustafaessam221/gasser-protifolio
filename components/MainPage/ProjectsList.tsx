@@ -5,7 +5,7 @@ import { Project } from "@/types/project";
 import { fetchProjects } from "@/utils/firebaseFunctions";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "../ProjectCard";
 
 interface Props {
   limit: number;

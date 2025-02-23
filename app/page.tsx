@@ -1,6 +1,6 @@
 import ContactForm from "@/components/ContactForm";
 import Hero from "@/components/MainPage/Hero";
-import ProjectsList from "@/components/ProjectsList";
+import ProjectsList from "@/components/MainPage/ProjectsList";
 
 export default async function Home() {
   return (
