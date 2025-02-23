@@ -27,14 +27,14 @@ export default function ProjectsList(props: Readonly<Props>) {
   }
 
   return (
-    <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 bg-black py-12">
+    <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 py-12 transparent-background">
       <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-16 items-center mb-4">
-        <h1 className="text-2xl lg:text-4xl font-semibold text-white">
+        <h1 className="text-xl lg:text-4xl font-semibold text-white font-eczar">
           Featured Work
         </h1>
         <Link
           href="/work"
-          className="py-2 lg:py-[15px] px-6 lg:px-[84px] border-white border-[3px] lg:border-[5px] font-workSans text-white text-lg lg:text-xl"
+          className="py-2 lg:py-[15px] px-6 lg:px-[84px] border-white border-[3px] lg:border-[5px] rounded-[5px] font-workSans text-white text-[12px] lg:text-xl"
         >
           View All Work
         </Link>

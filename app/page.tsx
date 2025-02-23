@@ -1,5 +1,5 @@
 import ContactForm from "@/components/ContactForm";
-import Hero from "@/components/Hero";
+import Hero from "@/components/MainPage/Hero";
 import ProjectsList from "@/components/ProjectsList";
 
 export default async function Home() {

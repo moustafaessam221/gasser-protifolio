@@ -15,7 +15,7 @@ export default function ProjectCard({
       key={project.id}
       className="flex flex-col-reverse lg:flex-row h-auto lg:max-h-[414px] w-full mx-auto justify-between mb-4 bg-white rounded-[10px] md:rounded-[20px] lg:rounded-[30px] font-workSans hover:drop-shadow-custom-white transition-all duration-300 overflow-hidden"
     >
-      <div className="relative w-full lg:w-auto max-w-[650px] max-h-[414px] p-4 xl:ml-[114px] border-2 border-black flex flex-col">
+      <div className="relative w-full lg:w-auto max-w-[650px] max-h-[414px] p-4 xl:ml-[114px] flex flex-col">
         <h2 className="text-2xl xl:text-[32px] font-semibold mb-2 mt-4 xl:mt-[48px]">
           {project.title}
         </h2>

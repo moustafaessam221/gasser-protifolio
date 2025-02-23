@@ -25,7 +25,6 @@ export async function fetchProjectById(
         id: projectDoc.id,
         ...projectDoc.data(),
       } as Project;
-      console.log(projectData);
       return projectData;
     } else {
       console.log("No such document!");
@@ -58,7 +57,9 @@ export const uploadImage = async (file: File) => {
 };
 
 // upload a project
-export const addProjectToFirestore = async (projectData: Project) => {
+export const addProjectToFirestore = async (
+  projectData: Omit<Project, "id">
+) => {
   await addDoc(collection(db, "projects"), projectData);
 };
 

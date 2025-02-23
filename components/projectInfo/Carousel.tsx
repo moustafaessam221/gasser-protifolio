@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
@@ -9,7 +10,7 @@ interface Props {
 
 export default function Carousel({
   slides,
-  autoSlide = true,
+  autoSlide = false,
   autoSlideInterval = 2000,
 }: Readonly<Props>) {
   const [curr, setCurr] = useState(0);
@@ -36,9 +37,19 @@ export default function Carousel({
         {slides.map((slide, i) => (
           <div
             key={i}
-            className="shrink-0 w-full h-[70vh] flex justify-center items-center"
+            className="shrink-0 w-full h-auto flex justify-center items-center"
           >
-            <img className="h-full" src={slide} alt="" />
+            <Image
+              width={334}
+              height={684}
+              src={slide}
+              alt=""
+              style={{
+                objectFit: "cover",
+
+                height: "100%",
+              }}
+            />
           </div>
         ))}
       </div>

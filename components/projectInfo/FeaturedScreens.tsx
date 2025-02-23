@@ -22,7 +22,6 @@ const FeaturedScreens = ({ featured_images }: Props) => {
     setCurrentImageIndex(0);
     // setPrevImgIndex(featured_images.length - 1);
     // setNextImgIndex(1);
-    console.log("featured_images", featured_images);
     setIsLoading(false);
   }, [featured_images]);
 

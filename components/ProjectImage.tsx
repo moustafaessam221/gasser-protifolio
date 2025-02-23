@@ -31,7 +31,7 @@ const ProjectImage = (props: Props) => {
       </div>
 
       {/* Foreground Images */}
-      <div className="relative z-10 flex border-2 border-red-500 justify-center">
+      <div className="relative z-10 flex justify-center">
         <div className="flex gap-8">
           <motion.div>
             <Image

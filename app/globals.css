@@ -30,7 +30,7 @@ body {
   @apply px-2 md:px-12 lg:px-20;
 }
 .secondry-button {
-  @apply px-4 py-4 font-semibold w-56;
+  @apply w-[136px] h-[36px] md:h-auto md:px-4 md:py-4 font-semibold md:w-56 flex items-center justify-center text-xs md:text-xl;
 }
 button {
   @apply font-workSans;
@@ -51,4 +51,28 @@ button {
 
 .clip-path-to-right {
   clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+}
+.transparent-background {
+  background: linear-gradient(
+    to bottom left,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 1) 30%
+  );
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0.15em;
+  animation: typing 2s steps(15, end);
+  /* blink-caret 0.4s step-end infinite alternate; */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }

@@ -15,8 +15,6 @@ const GoogleSignInButton: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
       const user = result.user;
 
       dispatch(
@@ -27,9 +25,6 @@ const GoogleSignInButton: React.FC = () => {
           photoURL: user.photoURL,
         })
       );
-
-      console.log("User Info:", user);
-      console.log("Access Token:", token);
     } catch (error) {
       console.error("Error during sign-in:", error);
     }
