@@ -1,11 +1,11 @@
-// src/components/ProjectForm.tsx
 import Image from "next/image";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 interface FormValues {
   title: string;
-  description: string;
+  short_description: string;
+  long_description: string;
   bg_img: FileList;
   device: FileList;
   featuredImages: FileList;
@@ -57,16 +57,48 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         <span className="text-red-500">{errors.title.message}</span>
       )}
 
-      <label htmlFor="description" className="font-semibold">
-        Description
+      <label htmlFor="short_description" className="font-semibold">
+        Short Description
       </label>
       <textarea
         placeholder="Description"
-        {...register("description", { required: "Description is required" })}
+        {...register("short_description", {
+          required: "Description is required",
+          minLength: {
+            value: 10,
+            message: "Description must be at least 10 characters",
+          },
+          maxLength: {
+            value: 170,
+            message: "Description must be at most 100 characters",
+          },
+        })}
         className="border p-2 rounded"
       />
-      {errors.description && (
-        <span className="text-red-500">{errors.description.message}</span>
+      {errors.short_description && (
+        <span className="text-red-500">{errors.short_description.message}</span>
+      )}
+
+      <label htmlFor="short_description" className="font-semibold">
+        Long Description
+      </label>
+      <textarea
+        placeholder="Description"
+        {...register("long_description", {
+          required: "Description is required",
+          minLength: {
+            value: 10,
+            message: "Description must be at least 10 characters",
+          },
+          maxLength: {
+            value: 350,
+            message: "Description must be at most 350 characters",
+          },
+        })}
+        className="border p-2 rounded"
+      />
+      {errors.long_description && (
+        <span className="text-red-500">{errors.long_description.message}</span>
       )}
 
       <label htmlFor="bg_img" className="font-semibold">

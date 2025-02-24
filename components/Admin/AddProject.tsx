@@ -6,7 +6,8 @@ import { uploadImage, addProjectToFirestore } from "@/utils/firebaseFunctions";
 
 interface FormValues {
   title: string;
-  description: string;
+  short_description: string;
+  long_description: string;
   bg_img: FileList;
   device: FileList;
   featuredImages: FileList;
@@ -24,7 +25,8 @@ export default function AddProject() {
 
       await addProjectToFirestore({
         title: data.title,
-        description: data.description,
+        short_description: data.short_description,
+        long_description: data.long_description,
         bg_img: bg_imgUrl,
         device: deviceUrl,
         featured_Images: featuredImagesUrls,

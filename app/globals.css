@@ -19,6 +19,7 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   @apply font-eczar;
+  scroll-behavior: smooth;
 }
 * {
   box-sizing: border-box;
@@ -30,7 +31,7 @@ body {
   @apply px-2 md:px-12 lg:px-20;
 }
 .secondry-button {
-  @apply w-[136px] h-[36px] md:h-auto md:px-4 md:py-4 font-semibold md:w-56 flex items-center justify-center text-xs md:text-xl;
+  @apply w-[136px] h-[36px] md:h-auto md:px-4 md:py-4 font-semibold md:w-56 flex items-center justify-center text-xs md:text-xl rounded-[6px];
 }
 button {
   @apply font-workSans;

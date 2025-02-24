@@ -1,7 +1,8 @@
 export type Project = {
   id: string | number;
   title: string | undefined;
-  description: string;
+  short_description: string;
+  long_description: string;
   featured_Images: string[];
   device: string;
   bg_img: string;

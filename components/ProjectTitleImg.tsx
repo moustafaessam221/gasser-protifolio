@@ -10,7 +10,10 @@ const ProjectTitleImg = ({ bgimg, device }: Props) => {
   if (!bgimg || !device) return null;
 
   return (
-    <div className="relative overflow-hidden group max-h-[414px]">
+    <div
+      className="relative overflow-hidden group max-h-[414px]"
+      style={{ borderRadius: "inherit" }}
+    >
       <Image
         src={bgimg}
         alt="Picture of the background"
