@@ -27,7 +27,10 @@ export default function ProjectsList(props: Readonly<Props>) {
   }
 
   return (
-    <div className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 py-12 transparent-background">
+    <div
+      className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 py-12 transparent-background"
+      id="my-work"
+    >
       <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-16 items-center mb-4">
         <h1 className="text-xl lg:text-4xl font-semibold text-white font-eczar">
           Featured Work
@@ -39,7 +42,7 @@ export default function ProjectsList(props: Readonly<Props>) {
           View All Work
         </Link>
       </div>
-      <div className="flex flex-col gap-14 mb-12" id="my-work">
+      <div className="flex flex-col gap-14 mb-12">
         {data.map((project: Project) => (
           <ProjectCard key={project.id} project={project} />
         ))}

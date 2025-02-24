@@ -35,7 +35,7 @@ const ProjectDetails = (props: Props) => {
         bg_img={data?.bg_img ?? ""}
         device={data?.device ?? ""}
       />
-      <h2 className="text-[32px] font-semibold text-center text-white my-[70px]">
+      <h2 className="text-[32px] font-semibold text-center text-white my-[32px] lg:my-[64px]">
         Featured Screens
       </h2>
       {/* <FeaturedScreens featured_images={data?.featured_Images ?? []} /> */}

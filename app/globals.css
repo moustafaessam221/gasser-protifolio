@@ -28,7 +28,7 @@ body {
   scroll-behavior: smooth;
 }
 .responsive-padding {
-  @apply px-2 md:px-12 lg:px-20;
+  @apply px-4 md:px-12 lg:px-20;
 }
 .secondry-button {
   @apply w-[136px] h-[36px] md:h-auto md:px-4 md:py-4 font-semibold md:w-56 flex items-center justify-center text-xs md:text-xl rounded-[6px];
