@@ -33,7 +33,7 @@ export default function AddProject() {
         featured_Images: featuredImagesUrls,
         featured: data.featured,
       });
-
+      console.log(data.short_description);
       alert("Project uploaded successfully!");
     } catch (error) {
       console.error("Error uploading project: ", error);

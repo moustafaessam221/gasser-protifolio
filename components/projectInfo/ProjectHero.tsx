@@ -1,6 +1,7 @@
 import ProjectTitleImg from "../ProjectTitleImg";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
+import { convertNewlinesToBreaks } from "@/utils/textUtils";
 
 type Props = {
   title: string;
@@ -25,7 +26,7 @@ const ProjectHero = (props: Props) => {
           <div className="flex-col gap-4 lg:flex">
             <h2 className="text-3xl font-semibold">{props.title}</h2>
             <p className="text-xl leading-9 w-[700px]">
-              {props.long_description}
+              {convertNewlinesToBreaks(props.long_description)}
             </p>
           </div>
           <div
@@ -52,7 +53,9 @@ const ProjectHero = (props: Props) => {
         >
           <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
         </div>
-        <p className="text-xl leading-9 mb-[64px]">{props.long_description}</p>
+        <p className="text-xl leading-9 mb-[64px]">
+          {convertNewlinesToBreaks(props.long_description)}
+        </p>
       </div>
     </>
   );

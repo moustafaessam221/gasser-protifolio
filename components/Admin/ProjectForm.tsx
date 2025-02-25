@@ -57,7 +57,11 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
         <input
           type="text"
           placeholder="Enter project title"
-          {...register("title", { required: "Title is required" })}
+          {...register("title", {
+            required: "Title is required",
+            minLength: 3,
+            maxLength: 50,
+          })}
           className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {errors.title && (

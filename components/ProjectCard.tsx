@@ -2,6 +2,7 @@ import { Project } from "@/types/project";
 import Link from "next/link";
 import ProjectTitleImg from "./ProjectTitleImg";
 import { truncateText } from "@/utils/functions";
+import { convertNewlinesToBreaks } from "@/utils/textUtils";
 
 export default function ProjectCard({
   project,
@@ -20,10 +21,10 @@ export default function ProjectCard({
           {project.title}
         </h2>
         <p className="text-lg block lg:hidden xl:block lg:text-xl font-normal leading-7 lg:leading-9 lg:line-clamp-1 xl:line-clamp-none">
-          {project.short_description}
+          {convertNewlinesToBreaks(project.short_description)}
         </p>
         <p className="text-lg hidden lg:block xl:hidden lg:text-xl font-normal">
-          {trancatedText}
+          {convertNewlinesToBreaks(trancatedText)}
         </p>
         <div className="font-semibold cursor-pointer hidden lg:block text-lg xl:text-2xl">
           View
