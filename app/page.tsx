@@ -7,7 +7,7 @@ export default async function Home() {
     <div className="flex flex-col overflow-x-hidden">
       <Hero />
       <ProjectsList />
-      <div className="mt-12" id="contact">
+      <div className="mt-12">
         <ContactForm />
       </div>
     </div>

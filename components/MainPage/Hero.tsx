@@ -7,8 +7,8 @@ const Hero = () => {
   return (
     <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[710px] responsive-padding">
       <div className="flex flex-col pt-8 lg:py-16 xl:py-32 w-full">
-        <button className="bg-black h-[37px] md:h-14 text-white w-[101px] md:w-44 text-[13px] md:text-xl lg:text-2xl rounded-xl flex gap-1 items-center justify-center font-workSans z-10 font-semibold">
-          <PiHandWaving className="text-yellow-500" fill="yellow" />
+        <button className="bg-black h-[37px] md:h-14 text-white w-[101px] md:w-44 text-[13px] md:text-xl lg:text-2xl rounded-xl flex gap-1 items-center justify-center font-workSans z-10 font-semibold group">
+          <PiHandWaving className="text-yellow-300 group-hover:animate-bounce" />
           Hello All
         </button>
         <div
@@ -28,7 +28,7 @@ const Hero = () => {
             View My Work &nbsp; <FaArrowRight />
           </Link>
           <Link
-            href="#contact"
+            href="#contact_me"
             className="secondry-button bg-white border-2  border-black hover:bg-black hover:text-white"
           >
             Contact me

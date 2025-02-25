@@ -11,7 +11,7 @@ const ProjectTitleImg = ({ bgimg, device }: Props) => {
 
   return (
     <div
-      className="relative overflow-hidden group max-h-[414px]"
+      className="relative overflow-hidden  max-h-[414px]"
       style={{ borderRadius: "inherit" }}
     >
       <Image

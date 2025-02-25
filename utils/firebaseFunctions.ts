@@ -12,7 +12,12 @@ import {
 } from "firebase/firestore";
 import { db, storage } from "@/lib/firebase";
 import { Project } from "@/types/project";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 // Function to fetch a specific project by ID
 export async function fetchProjectById(
@@ -107,9 +112,36 @@ export async function deleteProjectById(
 ): Promise<boolean> {
   try {
     const projectDocRef = doc(db, "projects", String(projectId));
-    await deleteDoc(projectDocRef);
-    console.log(`Project ${projectId} deleted successfully!`);
-    return true;
+    const projectDoc = await getDoc(projectDocRef);
+
+    if (projectDoc.exists()) {
+      const projectData = projectDoc.data() as Project;
+
+      // delete images from featured imagess
+      for (const imagePath of projectData.featured_Images) {
+        const imageRef = ref(storage, imagePath);
+        await deleteObject(imageRef);
+      }
+
+      // delete the device image
+      if (projectData.device) {
+        const deviceRef = ref(storage, projectData.device);
+        await deleteObject(deviceRef);
+      }
+
+      // delete the project background image
+      if (projectData.bg_img) {
+        const bgImgRef = ref(storage, projectData.bg_img);
+        await deleteObject(bgImgRef);
+      }
+
+      await deleteDoc(projectDocRef);
+      console.log(`Project ${projectId} and its images deleted successfully!`);
+      return true;
+    } else {
+      console.log("No such project!");
+      return false;
+    }
   } catch (error) {
     console.error("Error deleting project:", error);
     return false;

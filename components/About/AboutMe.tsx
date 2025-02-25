@@ -1,6 +1,7 @@
 import personalImg from "@/public/images/personal_photo.png";
 import Image from "next/image";
 import ContactForm from "../ContactForm";
+import Link from "next/link";
 
 const AboutMe = () => {
   return (
@@ -23,9 +24,12 @@ const AboutMe = () => {
             create digital experiences that simplify life and spark genuine
             delight in every interaction.
           </p>
-          <button className="secondry-button border-white border-2">
+          <Link
+            href="#contact_me"
+            className="secondry-button border-white border-2 hover:bg-white hover:text-black"
+          >
             Contact Me
-          </button>
+          </Link>
         </div>
         <div className="relative h-full ">
           <Image

@@ -65,20 +65,26 @@ const ProjectsControl = () => {
             <div className="flex gap-4">
               <button
                 onClick={() => changeFeaturedMutation.mutate(project.id)}
+                disabled={changeFeaturedMutation.status === "pending"}
                 className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
                   project.featured
                     ? "bg-green-500 text-white hover:bg-green-600"
                     : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                 }`}
               >
-                Featured? {project.featured ? "Yes" : "No"}
+                {changeFeaturedMutation.status === "pending"
+                  ? "Updating..."
+                  : project.featured
+                    ? "Featured"
+                    : "Not Featured"}
               </button>
 
               <button
                 onClick={() => deleteMutation.mutate(project.id)}
+                disabled={deleteMutation.status === "pending"}
                 className="px-4 py-2 rounded-lg text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white transition-colors duration-300"
               >
-                Delete
+                {deleteMutation.status === "pending" ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>
