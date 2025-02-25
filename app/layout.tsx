@@ -16,7 +16,7 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Gasser Designs",
+  title: "Gasser Design",
   description: "This is the portfolio of Gasser Amr, a UI/UX Designer.",
 };
 

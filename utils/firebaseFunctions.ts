@@ -71,11 +71,11 @@ export async function changeFeatured(
   projectId: string | number
 ): Promise<boolean> {
   try {
-    const projectRef = doc(db, "projects", projectId);
-    const project = await getDoc(projectRef);
+    const projectDocRef = doc(db, "projects", String(projectId));
+    const project = await getDoc(projectDocRef);
     if (project.exists()) {
       const updatedFeatured = !project.data().featured;
-      await updateDoc(projectRef, { featured: updatedFeatured });
+      await updateDoc(projectDocRef, { featured: updatedFeatured });
       return updatedFeatured;
     } else {
       console.log("No such project!");
