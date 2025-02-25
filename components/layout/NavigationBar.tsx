@@ -46,7 +46,7 @@ const NavigationBar = () => {
           <Link href={linkedIn} target="_blank" rel="noopener noreferrer">
             <FaLinkedin
               size={32}
-              className="transition-colors duration-300 ease-in-out"
+              className="transition-colors duration-300 ease-in-out hover:text-blue-600"
             />
           </Link>
         </nav>
@@ -78,7 +78,7 @@ const NavigationBar = () => {
             })}
           </ul>
           <Link href={linkedIn} target="_blank" rel="noopener noreferrer">
-            <FaLinkedin size={32} className="text-[#8E9FC4]" />
+            <FaLinkedin size={32} className="text-[#8E9FC4] hover:text-white" />
           </Link>
         </nav>
       </div>
