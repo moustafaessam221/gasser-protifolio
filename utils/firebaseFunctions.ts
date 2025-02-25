@@ -7,6 +7,8 @@ import {
   getDocs,
   limit,
   query,
+  updateDoc,
+  where,
 } from "firebase/firestore";
 import { db, storage } from "@/lib/firebase";
 import { Project } from "@/types/project";
@@ -48,8 +50,44 @@ export async function fetchProjects(maxProjects?: number): Promise<Project[]> {
   })) as Project[];
 }
 
-// upload an img with the data
+// fetch featured projects only
+export async function fetchFeaturedProjects(): Promise<Project[]> {
+  try {
+    const projectsRef = collection(db, "projects");
+    const q = query(projectsRef, where("featured", "==", true));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Project[];
+  } catch (error) {
+    console.error("Error fetching featured projects:", error);
+    return [];
+  }
+}
 
+// change feautred from true to false or vice versa
+export async function changeFeatured(
+  projectId: string | number
+): Promise<boolean> {
+  try {
+    const projectRef = doc(db, "projects", projectId);
+    const project = await getDoc(projectRef);
+    if (project.exists()) {
+      const updatedFeatured = !project.data().featured;
+      await updateDoc(projectRef, { featured: updatedFeatured });
+      return updatedFeatured;
+    } else {
+      console.log("No such project!");
+      return false;
+    }
+  } catch (error) {
+    console.error("Error updating project:", error);
+    return false;
+  }
+}
+
+// upload an img with the data
 export const uploadImage = async (file: File) => {
   const imageRef = ref(storage, `images/${file.name}`);
   await uploadBytes(imageRef, file);

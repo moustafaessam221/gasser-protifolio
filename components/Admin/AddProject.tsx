@@ -11,6 +11,7 @@ interface FormValues {
   bg_img: FileList;
   device: FileList;
   featuredImages: FileList;
+  featured: boolean;
 }
 
 export default function AddProject() {
@@ -30,6 +31,7 @@ export default function AddProject() {
         bg_img: bg_imgUrl,
         device: deviceUrl,
         featured_Images: featuredImagesUrls,
+        featured: data.featured,
       });
 
       alert("Project uploaded successfully!");

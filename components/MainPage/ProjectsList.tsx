@@ -2,19 +2,15 @@
 
 import Loading from "@/app/loading";
 import { Project } from "@/types/project";
-import { fetchProjects } from "@/utils/firebaseFunctions";
+import { fetchFeaturedProjects } from "@/utils/firebaseFunctions";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import ProjectCard from "../ProjectCard";
 
-interface Props {
-  limit: number;
-}
-
-export default function ProjectsList(props: Readonly<Props>) {
+export default function ProjectsList() {
   const { isPending, data, error } = useQuery({
-    queryKey: ["projects", props.limit],
-    queryFn: () => fetchProjects(props.limit),
+    queryKey: ["projects", "featured"],
+    queryFn: () => fetchFeaturedProjects(),
   });
 
   if (isPending) {

@@ -6,6 +6,7 @@ export type Project = {
   featured_Images: string[];
   device: string;
   bg_img: string;
+  featured: boolean;
 };
 
 // carousel settings

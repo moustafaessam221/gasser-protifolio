@@ -9,6 +9,7 @@ interface FormValues {
   bg_img: FileList;
   device: FileList;
   featuredImages: FileList;
+  featured: boolean;
 }
 
 const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
@@ -45,113 +46,142 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 p-4 bg-white shadow-md rounded-md"
+      className="flex flex-col gap-6 p-6 bg-white shadow-lg rounded-lg w-full mx-auto"
     >
-      <input
-        type="text"
-        placeholder="Title"
-        {...register("title", { required: "Title is required" })}
-        className="border p-2 rounded"
-      />
-      {errors.title && (
-        <span className="text-red-500">{errors.title.message}</span>
-      )}
+      <h2 className="text-2xl font-bold text-center mb-4">Project Form</h2>
 
-      <label htmlFor="short_description" className="font-semibold">
-        Short Description
-      </label>
-      <textarea
-        placeholder="Description"
-        {...register("short_description", {
-          required: "Description is required",
-          minLength: {
-            value: 10,
-            message: "Description must be at least 10 characters",
-          },
-          maxLength: {
-            value: 170,
-            message: "Description must be at most 100 characters",
-          },
-        })}
-        className="border p-2 rounded"
-      />
-      {errors.short_description && (
-        <span className="text-red-500">{errors.short_description.message}</span>
-      )}
-
-      <label htmlFor="short_description" className="font-semibold">
-        Long Description
-      </label>
-      <textarea
-        placeholder="Description"
-        {...register("long_description", {
-          required: "Description is required",
-          minLength: {
-            value: 10,
-            message: "Description must be at least 10 characters",
-          },
-          maxLength: {
-            value: 350,
-            message: "Description must be at most 350 characters",
-          },
-        })}
-        className="border p-2 rounded"
-      />
-      {errors.long_description && (
-        <span className="text-red-500">{errors.long_description.message}</span>
-      )}
-
-      <label htmlFor="bg_img" className="font-semibold">
-        background image
-      </label>
-      <input
-        type="file"
-        accept="image/*"
-        {...register("bg_img")}
-        onChange={(e) => handleImageChange(e, setBg_imgPreview)}
-        className="border p-2 rounded"
-      />
-      {bg_imgPreview && (
-        <Image
-          src={bg_imgPreview}
-          alt="bg_img Preview"
-          className="w-32 h-32 object-cover mt-2"
-          width={128}
-          height={128}
+      <div className="flex flex-col">
+        <label htmlFor="title" className="font-semibold mb-1">
+          Title
+        </label>
+        <input
+          type="text"
+          placeholder="Enter project title"
+          {...register("title", { required: "Title is required" })}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      )}
+        {errors.title && (
+          <span className="text-red-500 mt-1">{errors.title.message}</span>
+        )}
+      </div>
 
-      <label htmlFor="device" className="font-semibold">
-        Device
-      </label>
-      <input
-        type="file"
-        accept="image/*"
-        {...register("device")}
-        onChange={(e) => handleImageChange(e, setDevicePreview)}
-        className="border p-2 rounded"
-      />
-      {devicePreview && (
-        <Image
-          src={devicePreview}
-          alt="Device Preview"
-          className="w-32 h-32 object-cover mt-2"
-          width={128}
-          height={128}
+      <div className="flex flex-col">
+        <label htmlFor="short_description" className="font-semibold mb-1">
+          Short Description
+        </label>
+        <textarea
+          placeholder="Enter a short description"
+          {...register("short_description", {
+            required: "Description is required",
+            minLength: {
+              value: 10,
+              message: "Description must be at least 10 characters",
+            },
+            maxLength: {
+              value: 170,
+              message: "Description must be at most 170 characters",
+            },
+          })}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      )}
+        {errors.short_description && (
+          <span className="text-red-500 mt-1">
+            {errors.short_description.message}
+          </span>
+        )}
+      </div>
 
-      <label htmlFor="featuredImages" className="font-semibold">
-        Featured Images
-      </label>
-      <input
-        type="file"
-        accept="image/*"
-        multiple
-        {...register("featuredImages")}
-        onChange={handleMultipleImagesChange}
-        className="border p-2 rounded"
-      />
+      <div className="flex flex-col">
+        <label htmlFor="long_description" className="font-semibold mb-1">
+          Long Description
+        </label>
+        <textarea
+          placeholder="Enter a detailed description"
+          {...register("long_description", {
+            required: "Description is required",
+            minLength: {
+              value: 10,
+              message: "Description must be at least 10 characters",
+            },
+            maxLength: {
+              value: 350,
+              message: "Description must be at most 350 characters",
+            },
+          })}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {errors.long_description && (
+          <span className="text-red-500 mt-1">
+            {errors.long_description.message}
+          </span>
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="bg_img" className="font-semibold mb-1">
+          Background Image
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          {...register("bg_img")}
+          onChange={(e) => handleImageChange(e, setBg_imgPreview)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {bg_imgPreview && (
+          <Image
+            src={bg_imgPreview}
+            alt="Background Image Preview"
+            className="w-32 h-32 object-cover mt-2"
+            width={128}
+            height={128}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="device" className="font-semibold mb-1">
+          Device
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          {...register("device")}
+          onChange={(e) => handleImageChange(e, setDevicePreview)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {devicePreview && (
+          <Image
+            src={devicePreview}
+            alt="Device Preview"
+            className="w-32 h-32 object-cover mt-2"
+            width={128}
+            height={128}
+          />
+        )}
+      </div>
+
+      <div className="flex flex-col">
+        <label htmlFor="featuredImages" className="font-semibold mb-1">
+          Featured Images
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          {...register("featuredImages")}
+          onChange={handleMultipleImagesChange}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div className="flex items-center">
+        <input type="checkbox" {...register("featured")} className="mr-2" />
+        <label htmlFor="featured" className="font-semibold">
+          Featured?
+        </label>
+      </div>
+
       <div className="flex gap-2 mt-2">
         {featuredImagesPreviews.map((src, index) => (
           <Image
@@ -167,7 +197,7 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
 
       <button
         type="submit"
-        className="bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600"
+        className="bg-blue-500 text-white p-3 rounded mt-4 hover:bg-blue-600 transition-colors duration-300"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Submitting..." : "Submit"}
