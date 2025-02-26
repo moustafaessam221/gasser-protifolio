@@ -6,6 +6,7 @@ import { RootState } from "@/store";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import Sidebar from "@/components/Admin/Sidebar";
 import MainContent from "@/components/Admin/MainContent";
+import SignoutButton from "@/components/Admin/SignoutButton";
 
 const AdminPage: React.FC = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
@@ -35,6 +36,15 @@ const AdminPage: React.FC = () => {
     return (
       <div>
         <GoogleSignInButton />
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div>
+        <h2>You are not authorized to access this page.</h2>
+        <SignoutButton />
       </div>
     );
   }

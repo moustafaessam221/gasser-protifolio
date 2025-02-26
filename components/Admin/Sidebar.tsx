@@ -1,3 +1,7 @@
+"use client";
+
+import { fetchUnreadMessages } from "@/utils/firebaseFunctions";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 interface SidebarProps {
@@ -11,6 +15,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   setActiveComponent,
   activeComponent,
 }) => {
+  const { data, isPending } = useQuery({
+    queryKey: ["unreadMessages"],
+    queryFn: () => fetchUnreadMessages(),
+  });
+
   return (
     <div className="w-1/4 p-4 border-r border-gray-300 flex flex-col gap-4 items-center justify-start min-h-screen">
       <button
@@ -31,10 +40,13 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <button
         onClick={() => setActiveComponent("Messages")}
-        className={`${buttonTailwindStyles}`}
+        className={`${buttonTailwindStyles} relative`}
         disabled={activeComponent === "Messages"}
       >
         Messages
+        <div className="absolute top-1/2 -translate-y-1/2 right-1/10 w-5 h-5 bg-red-500 rounded-full text-white flex items-center justify-center">
+          {isPending ? "..." : data?.length}
+        </div>
       </button>
 
       <button

@@ -201,3 +201,19 @@ export async function deleteMessageById(messageId: string | number) {
     console.error("Error deleting message:", error);
   }
 }
+
+// fetch all messages with read status false
+export async function fetchUnreadMessages(): Promise<Message[]> {
+  try {
+    const messageRef = collection(db, "messages");
+    const q = query(messageRef, where("read", "==", false));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Message[];
+  } catch (error) {
+    console.error("Error fetching unread messages:", error);
+    return [];
+  }
+}

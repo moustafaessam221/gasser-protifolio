@@ -13,6 +13,7 @@ const MessageInfo = (props: Props) => {
     mutationFn: () => changeReadStatus(props.id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["messages"] });
+      queryClient.invalidateQueries({ queryKey: ["unreadMessages"] });
     },
   });
 

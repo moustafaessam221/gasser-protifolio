@@ -1,19 +1,22 @@
 "use client";
+import { SentMessageType } from "@/types/project";
+import { sendMessage } from "@/utils/firebaseFunctions";
 import { useForm } from "react-hook-form";
 import styles from "./ContactForm.module.css";
-import { sendMessage } from "@/utils/firebaseFunctions";
-import { SentMessageType } from "@/types/project";
 
 export default function ContactForm() {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting, isValid },
+    formState: { isSubmitting, errors },
   } = useForm<SentMessageType>();
+
+  console.log(errors);
 
   const onSubmit = handleSubmit((data) => {
     const messageData = { ...data, read: false };
+    console.log(errors);
     sendMessage(messageData);
     reset();
   });
@@ -30,9 +33,15 @@ export default function ContactForm() {
               <input
                 id="firstName"
                 {...register("firstName", {
-                  required: true,
-                  minLength: 3,
-                  maxLength: 11,
+                  required: "First name is required",
+                  minLength: {
+                    value: 3,
+                    message: "First name must be at least 3 characters",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "First name must be at most 11 characters",
+                  },
                 })}
                 className={styles.input}
                 type="text"
@@ -40,6 +49,9 @@ export default function ContactForm() {
                 aria-label="First name"
                 required
               />
+              {errors.firstName && (
+                <p className={styles.error}>{errors.firstName.message}</p>
+              )}
             </div>
 
             <div className="w-full md:w-1/2 px-3">
@@ -49,9 +61,15 @@ export default function ContactForm() {
               <input
                 id="lastName"
                 {...register("lastName", {
-                  required: true,
-                  minLength: 2,
-                  maxLength: 11,
+                  required: "Last name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Last name must be at least 2 characters",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "Last name must be at most 11 characters",
+                  },
                 })}
                 className={styles.input}
                 type="text"
@@ -59,6 +77,9 @@ export default function ContactForm() {
                 aria-label="Last name"
                 required
               />
+              {errors.lastName && (
+                <p className={styles.error}>{errors.lastName.message}</p>
+              )}
             </div>
           </div>
           <div className={styles.inputContainer}>
@@ -69,9 +90,15 @@ export default function ContactForm() {
               <input
                 id="subject"
                 {...register("subject", {
-                  required: true,
-                  minLength: 5,
-                  maxLength: 40,
+                  required: "Subject is required",
+                  minLength: {
+                    value: 5,
+                    message: "Subject must be at least 5 characters",
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: "Subject must be at most 40 characters",
+                  },
                 })}
                 className={styles.input}
                 type="text"
@@ -79,6 +106,9 @@ export default function ContactForm() {
                 aria-label="Subject"
                 required
               />
+              {errors.subject && (
+                <p className={styles.error}>{errors.subject.message}</p>
+              )}
             </div>
             <div className="w-full md:w-3/5 px-3">
               <label htmlFor="email" className="sr-only">
@@ -87,8 +117,11 @@ export default function ContactForm() {
               <input
                 id="email"
                 {...register("email", {
-                  required: true,
-                  pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Invalid email address",
+                  },
                 })}
                 className={styles.input}
                 type="email"
@@ -96,6 +129,9 @@ export default function ContactForm() {
                 aria-label="Email"
                 required
               />
+              {errors.email && (
+                <p className={styles.error}>{errors.email.message}</p>
+              )}
             </div>
           </div>
           <div className="flex flex-wrap mb-6">
@@ -106,23 +142,28 @@ export default function ContactForm() {
               <textarea
                 id="message"
                 {...register("message", {
-                  required: true,
-                  minLength: 10,
-                  maxLength: 270,
+                  required: "Message is required",
+                  minLength: {
+                    value: 10,
+                    message: "Message must be at least 10 characters",
+                  },
+                  maxLength: {
+                    value: 270,
+                    message: "Message must be at most 270 characters",
+                  },
                 })}
                 className={`${styles.input} ${styles.textarea}`}
                 placeholder="Your message"
                 aria-label="Your message"
                 required
               ></textarea>
+              {errors.message && (
+                <p className={styles.error}>{errors.message.message}</p>
+              )}
             </div>
           </div>
           <div className="px-3">
-            <button
-              type="submit"
-              className={styles.button}
-              disabled={!isValid || isSubmitting}
-            >
+            <button type="submit" className={styles.button}>
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </div>
