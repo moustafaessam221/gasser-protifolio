@@ -38,7 +38,6 @@ const ProjectDetails = (props: Props) => {
       <h2 className="text-[32px] font-semibold text-center text-white my-[32px] lg:my-[64px]">
         Featured Screens
       </h2>
-      {/* <FeaturedScreens featured_images={data?.featured_Images ?? []} /> */}
       <Carousel slides={data?.featured_Images ?? []} />
     </div>
   );

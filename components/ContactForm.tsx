@@ -1,14 +1,8 @@
 "use client";
 import { useForm } from "react-hook-form";
 import styles from "./ContactForm.module.css";
-
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  message: string;
-  subject: string;
-};
+import { sendMessage } from "@/utils/firebaseFunctions";
+import { SentMessageType } from "@/types/project";
 
 export default function ContactForm() {
   const {
@@ -16,10 +10,13 @@ export default function ContactForm() {
     handleSubmit,
     reset,
     formState: { isSubmitting, isValid },
-  } = useForm<FormValues>();
+  } = useForm<SentMessageType>();
 
-  const onSubmit = handleSubmit((data) => (console.log(data), reset()));
-
+  const onSubmit = handleSubmit((data) => {
+    const messageData = { ...data, read: false };
+    sendMessage(messageData);
+    reset();
+  });
   return (
     <div className={styles.container} id="contact_me">
       <div className="w-full max-w-2xl">
@@ -32,9 +29,11 @@ export default function ContactForm() {
               </label>
               <input
                 id="firstName"
-                {...(register("firstName"),
-                { required: true },
-                { minLength: 3 })}
+                {...register("firstName", {
+                  required: true,
+                  minLength: 3,
+                  maxLength: 11,
+                })}
                 className={styles.input}
                 type="text"
                 placeholder="First name"
@@ -49,9 +48,11 @@ export default function ContactForm() {
               </label>
               <input
                 id="lastName"
-                {...(register("lastName"),
-                { required: true },
-                { minLength: 2 })}
+                {...register("lastName", {
+                  required: true,
+                  minLength: 2,
+                  maxLength: 11,
+                })}
                 className={styles.input}
                 type="text"
                 placeholder="Last name"
@@ -67,7 +68,11 @@ export default function ContactForm() {
               </label>
               <input
                 id="subject"
-                {...(register("subject"), { required: true }, { minLength: 5 })}
+                {...register("subject", {
+                  required: true,
+                  minLength: 5,
+                  maxLength: 40,
+                })}
                 className={styles.input}
                 type="text"
                 placeholder="Subject"
@@ -81,7 +86,10 @@ export default function ContactForm() {
               </label>
               <input
                 id="email"
-                {...(register("email"), { required: true }, { type: "email" })}
+                {...register("email", {
+                  required: true,
+                  pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                })}
                 className={styles.input}
                 type="email"
                 placeholder="Email"
@@ -97,9 +105,11 @@ export default function ContactForm() {
               </label>
               <textarea
                 id="message"
-                {...(register("message"),
-                { required: true },
-                { minLength: 10 })}
+                {...register("message", {
+                  required: true,
+                  minLength: 10,
+                  maxLength: 270,
+                })}
                 className={`${styles.input} ${styles.textarea}`}
                 placeholder="Your message"
                 aria-label="Your message"

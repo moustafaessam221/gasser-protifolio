@@ -11,7 +11,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db, storage } from "@/lib/firebase";
-import { Project } from "@/types/project";
+import { Message, Project, SentMessageType } from "@/types/project";
 import {
   deleteObject,
   getDownloadURL,
@@ -145,5 +145,59 @@ export async function deleteProjectById(
   } catch (error) {
     console.error("Error deleting project:", error);
     return false;
+  }
+}
+
+// fetch messages
+export async function fetchMessages(): Promise<Message[]> {
+  try {
+    const messageRef = collection(db, "messages");
+    const querySnapshot = await getDocs(messageRef);
+    return querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as Message[];
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    return [];
+  }
+}
+
+// change from read to unread or vice versa
+export async function changeReadStatus(messageId: string | number) {
+  try {
+    const messageDocRef = doc(db, "messages", String(messageId));
+    const message = await getDoc(messageDocRef);
+    if (message.exists()) {
+      const updatedRead = !message.data().read; // toggle read status
+      await updateDoc(messageDocRef, { read: updatedRead }); // update read status
+      return updatedRead;
+    } else {
+      console.log("No such message!");
+      return false;
+    }
+  } catch (error) {
+    console.error("Error updating message:", error);
+    return false;
+  }
+}
+
+// send a message
+export const sendMessage = async (messageData: SentMessageType) => {
+  try {
+    await addDoc(collection(db, "messages"), messageData);
+  } catch (error) {
+    console.error("Error sending message:", error);
+  }
+};
+
+// delete message by ID
+export async function deleteMessageById(messageId: string | number) {
+  try {
+    const messageDocRef = doc(db, "messages", String(messageId));
+    await deleteDoc(messageDocRef);
+    console.log(`Message ${messageId} deleted successfully!`);
+  } catch (error) {
+    console.error("Error deleting message:", error);
   }
 }

@@ -18,6 +18,7 @@ const ProjectsControl = () => {
   } = useQuery({
     queryKey: ["adminProjects"],
     queryFn: () => fetchProjects(),
+    staleTime: 1000 * 60 * 5,
   });
 
   // Mutation for deleting a project

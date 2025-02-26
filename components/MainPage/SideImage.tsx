@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import HomeImg from "@/public/images/test_home.svg";
+import HomeImg from "@/public/images/performanceHome.webp";
 import { motion } from "framer-motion";
 
 const SideImage = () => {

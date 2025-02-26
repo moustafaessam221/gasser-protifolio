@@ -9,37 +9,20 @@ export type Project = {
   featured: boolean;
 };
 
-// carousel settings
-export type FeaturedScreensProps = {
-  featured_images: string[];
+export type Message = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  subject: string;
+  message: string;
+  read: boolean;
 };
 
-export type NavigationButtonProps = {
-  direction: "prev" | "next";
-  onClick: () => void;
-  className?: string;
-};
-
-export type CarouselImageProps = {
-  src: string;
-  alt: string;
-  width: string;
-  isActive?: boolean;
-  onClick?: () => void;
-  onLoad?: () => void;
-};
-
-export type DotsNavigationProps = {
-  images: string[];
-  currentIndex: number;
-  onChange: (index: number) => void;
-};
-
-export type ImageModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  images: string[];
-  currentIndex: number;
-  onPrevious: () => void;
-  onNext: () => void;
+export type SentMessageType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  subject: string;
+  message: string;
 };

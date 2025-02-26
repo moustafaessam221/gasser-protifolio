@@ -1,6 +1,10 @@
-import ContactForm from "@/components/ContactForm";
-import Hero from "@/components/MainPage/Hero";
-import ProjectsList from "@/components/MainPage/ProjectsList";
+import dynamic from "next/dynamic";
+
+const Hero = dynamic(() => import("@/components/MainPage/Hero"));
+const ProjectsList = dynamic(
+  () => import("@/components/MainPage/ProjectsList")
+);
+const ContactForm = dynamic(() => import("@/components/ContactForm"));
 
 export default async function Home() {
   return (

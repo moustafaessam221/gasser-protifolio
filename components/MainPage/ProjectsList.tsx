@@ -11,6 +11,7 @@ export default function ProjectsList() {
   const { isPending, data, error } = useQuery({
     queryKey: ["projects", "featured"],
     queryFn: () => fetchFeaturedProjects(),
+    staleTime: 1000 * 60 * 5,
   });
 
   if (isPending) {

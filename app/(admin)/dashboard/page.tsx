@@ -1,27 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import AddProject from "@/components/Admin/AddProject";
-import ProjectsControl from "@/components/Admin/ProjectsControl";
-import GoogleSignInButton from "@/components/GoogleSignInButton";
-
-import { RootState } from "@/store";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import SignoutButton from "@/components/Admin/SignoutButton";
+import { RootState } from "@/store";
+import GoogleSignInButton from "@/components/GoogleSignInButton";
+import Sidebar from "@/components/Admin/Sidebar";
+import MainContent from "@/components/Admin/MainContent";
 
-const AdminPage = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+const AdminPage: React.FC = () => {
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [activeComponent, setActiveComponent] = useState<string>("AddProject");
   const userInfo = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (userInfo) {
-        const response = await fetch("/api/checkAdmin", {
-          method: "POST",
-          body: JSON.stringify({ email: userInfo.email }),
-        });
-        const data = await response.json();
-        setIsAdmin(data.isAdmin);
+        try {
+          const response = await fetch("/api/checkAdmin", {
+            method: "POST",
+            body: JSON.stringify({ email: userInfo.email }),
+          });
+          const data = await response.json();
+          setIsAdmin(data.isAdmin);
+        } catch (error) {
+          console.error("Failed to check admin status:", error);
+        }
       }
     };
 
@@ -37,25 +40,12 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="responsive-padding">
-      {isAdmin ? (
-        <div className="flex flex-col gap-4 my-4">
-          <h1 className="text-2xl font-semibold">
-            Hello {userInfo.displayName}
-          </h1>
-          <AddProject />
-          <ProjectsControl />
-          <SignoutButton />
-        </div>
-      ) : (
-        <div>
-          <h1 className="text-2xl font-semibold">
-            Hello {userInfo.displayName}
-          </h1>
-          <p>Sorry, you don&apos;t have access to this page</p>
-          <SignoutButton />
-        </div>
-      )}
+    <div className="responsive-padding flex">
+      <Sidebar
+        setActiveComponent={setActiveComponent}
+        activeComponent={activeComponent}
+      />
+      <MainContent activeComponent={activeComponent} isAdmin={isAdmin} />
     </div>
   );
 };
