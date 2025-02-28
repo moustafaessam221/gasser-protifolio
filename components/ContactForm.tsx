@@ -16,7 +16,6 @@ export default function ContactForm() {
 
   const onSubmit = handleSubmit((data) => {
     const messageData = { ...data, read: false };
-    console.log(errors);
     sendMessage(messageData);
     reset();
   });

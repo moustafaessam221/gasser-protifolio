@@ -26,7 +26,7 @@ const AboutMe = () => {
           </p>
           <Link
             href="#contact_me"
-            className="secondry-button border-white border-2 hover:bg-white hover:text-black"
+            className="secondry-button border-white border-2 hover:bg-white hover:text-black mt-[32px]"
           >
             Contact Me
           </Link>
