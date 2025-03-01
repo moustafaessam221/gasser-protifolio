@@ -60,3 +60,18 @@ button {
     rgba(0, 0, 0, 1) 300px
   );
 }
+
+@keyframes image-move {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.image-move {
+  animation: image-move 2s ease-in-out infinite;
+}

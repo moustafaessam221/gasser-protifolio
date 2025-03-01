@@ -217,3 +217,26 @@ export async function fetchUnreadMessages(): Promise<Message[]> {
     return [];
   }
 }
+
+// import the bio
+export async function fetchBio(): Promise<string> {
+  try {
+    const bioRef = doc(db, "site-edit", "profile");
+    const bioSnapshot = await getDoc(bioRef);
+    const bio = bioSnapshot.data()?.bio as string;
+    return bio;
+  } catch (error) {
+    console.error("Error fetching bio:", error);
+    return "";
+  }
+}
+
+// update the bio
+export async function updateBio(bio: string) {
+  try {
+    const bioRef = doc(db, "site-edit", "profile");
+    await updateDoc(bioRef, { bio: bio });
+  } catch (error) {
+    console.error("Error updating bio:", error);
+  }
+}

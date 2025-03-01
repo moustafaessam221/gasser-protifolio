@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaLinkedin, FaBars } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
+
 interface LinkType {
   href: string;
   label: string;

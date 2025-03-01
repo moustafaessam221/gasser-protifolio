@@ -50,6 +50,14 @@ const Sidebar: React.FC<SidebarProps> = ({
       </button>
 
       <button
+        onClick={() => setActiveComponent("EditBio")}
+        className={`${buttonTailwindStyles}`}
+        disabled={activeComponent === "EditBio"}
+      >
+        Edit Profile
+      </button>
+
+      <button
         onClick={() => setActiveComponent("SignoutButton")}
         className={`${buttonTailwindStyles} mt-auto bg-red-500 hover:bg-red-600`}
         disabled={activeComponent === "SignoutButton"}

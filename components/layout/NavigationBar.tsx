@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaLinkedin } from "react-icons/fa";
-import MobileNavigation from "./MobileNavigation";
+import { lazy, Suspense } from "react";
+const MobileNavigation = lazy(() => import("./MobileNavigation"));
 
 const links: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
@@ -84,7 +85,13 @@ const NavigationBar = () => {
       </div>
 
       {/* Mobile Navigation */}
-      <MobileNavigation links={links} linkedIn={linkedIn} pathname={pathname} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <MobileNavigation
+          links={links}
+          linkedIn={linkedIn}
+          pathname={pathname}
+        />
+      </Suspense>
     </>
   );
 };
