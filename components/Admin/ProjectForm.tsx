@@ -107,10 +107,6 @@ const ProjectForm: React.FC<{ onSubmit: SubmitHandler<FormValues> }> = ({
               value: 10,
               message: "Description must be at least 10 characters",
             },
-            maxLength: {
-              value: 350,
-              message: "Description must be at most 350 characters",
-            },
           })}
           className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
