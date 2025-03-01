@@ -75,3 +75,9 @@ button {
 .image-move {
   animation: image-move 2s ease-in-out infinite;
 }
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

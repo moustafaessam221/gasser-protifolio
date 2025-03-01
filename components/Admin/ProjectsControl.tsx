@@ -21,7 +21,11 @@ const ProjectsControl = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  const deleteMutation = useMutation({
+  const {
+    mutate: deleteMutation,
+    isPending: isDeleteLoading,
+    error: deleteError,
+  } = useMutation({
     mutationFn: deleteProjectById,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
@@ -31,22 +35,39 @@ const ProjectsControl = () => {
     },
   });
 
-  const changeFeaturedMutation = useMutation({
+  const {
+    mutate: changeFeaturedMutation,
+    isPending: isFeaturedLoading,
+    error: featuredError,
+  } = useMutation({
     mutationFn: changeFeatured,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
     },
   });
 
-  const { mutate: changeOrderMutation, isPending: isOrderLoading } =
-    useMutation<void, Error, { projectId: string | number; order: number }>({
-      mutationFn: ({ projectId, order }) => editProjectOrder(projectId, order),
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
-        queryClient.invalidateQueries({ queryKey: ["projects"] });
-        queryClient.invalidateQueries({ queryKey: ["projects", "featured"] });
-      },
-    });
+  async function handleOrderEdit(projectId: string | number, order: number) {
+    if (projects?.some((project) => project.order === order)) {
+      throw new Error("Order number already exists.");
+    } else if (order < 0) {
+      throw new Error("Order number cannot be negative.");
+    } else {
+      await editProjectOrder(projectId, order);
+    }
+  }
+
+  const {
+    mutate: changeOrderMutation,
+    isPending: isOrderLoading,
+    error: orderError,
+  } = useMutation<void, Error, { projectId: string | number; order: number }>({
+    mutationFn: ({ projectId, order }) => handleOrderEdit(projectId, order),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      queryClient.invalidateQueries({ queryKey: ["projects", "featured"] });
+    },
+  });
 
   if (isLoading) {
     return <div className="text-center mt-4">Loading projects...</div>;
@@ -73,7 +94,7 @@ const ProjectsControl = () => {
             <h1 className="text-xl font-semibold mb-2 md:mb-0">
               {project.title}
             </h1>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
               <div>
                 <input
                   type="number"
@@ -82,21 +103,21 @@ const ProjectsControl = () => {
                   onChange={(e) =>
                     changeOrderMutation({
                       projectId: project.id,
-                      order: Number(e.target.value),
+                      order: parseInt(e.target.value),
                     })
                   }
                 />
               </div>
               <button
-                onClick={() => changeFeaturedMutation.mutate(project.id)}
-                disabled={changeFeaturedMutation.status === "pending"}
+                onClick={() => changeFeaturedMutation(project.id)}
+                disabled={isFeaturedLoading}
                 className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
                   project.featured
                     ? "bg-green-500 text-white hover:bg-green-600"
                     : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                 }`}
               >
-                {changeFeaturedMutation.status === "pending"
+                {isFeaturedLoading
                   ? "Updating..."
                   : project.featured
                     ? "Featured"
@@ -104,11 +125,11 @@ const ProjectsControl = () => {
               </button>
 
               <button
-                onClick={() => deleteMutation.mutate(project.id)}
-                disabled={deleteMutation.status === "pending"}
+                onClick={() => deleteMutation(project.id)}
+                disabled={isDeleteLoading}
                 className="px-4 py-2 rounded-lg text-red-500 border-2 border-red-500 hover:bg-red-500 hover:text-white transition-colors duration-300"
               >
-                {deleteMutation.status === "pending" ? "Deleting..." : "Delete"}
+                {isDeleteLoading ? "Deleting..." : "Delete"}
               </button>
             </div>
           </div>
@@ -116,6 +137,29 @@ const ProjectsControl = () => {
       </div>
       {isOrderLoading && (
         <div className="text-center mt-4 text-blue-500">Updating order...</div>
+      )}
+      {orderError && (
+        <div className="text-center mt-4 text-red-500">
+          {orderError.message}
+        </div>
+      )}
+
+      {isDeleteLoading && (
+        <div className="text-center mt-4 text-red-500">Deleting project...</div>
+      )}
+      {deleteError && (
+        <div className="text-center mt-4 text-red-500">
+          {deleteError.message}
+        </div>
+      )}
+
+      {isFeaturedLoading && (
+        <div className="text-center mt-4 text-blue-500">Updating...</div>
+      )}
+      {featuredError && (
+        <div className="text-center mt-4 text-red-500">
+          {featuredError.message}
+        </div>
       )}
     </div>
   );

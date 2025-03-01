@@ -30,7 +30,6 @@ const ProjectDetails = (props: Props) => {
     <div className="flex flex-col gap-12 font-workSans">
       <ProjectHero
         title={data?.title ?? ""}
-        short_description={data?.short_description ?? ""}
         long_description={data?.long_description ?? ""}
         bg_img={data?.bg_img ?? ""}
         device={data?.device ?? ""}

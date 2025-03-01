@@ -5,7 +5,6 @@ import { convertNewlinesToBreaks } from "@/utils/textUtils";
 
 type Props = {
   title: string;
-  short_description: string;
   long_description: string;
   bg_img: string;
   device: string;
@@ -22,18 +21,20 @@ const ProjectHero = (props: Props) => {
         >
           <FaArrowLeft size={20} />
         </Link>
-        <div className="flex flex-col justify-between lg:flex-row gap-12 w-full h-full">
-          <div className="flex-col gap-4 lg:flex">
+        <div className="flex flex-col gap-12 w-full h-full">
+          <div className="flex flex-col gap-4">
             <h2 className="text-3xl font-semibold">{props.title}</h2>
-            <p className="text-xl leading-9 w-[700px]">
-              {convertNewlinesToBreaks(props.long_description)}
-            </p>
-          </div>
-          <div
-            className="w-full h-full overflow-hidden max-w-[650px] min-w-[400px] max-h-[414px]"
-            style={{ borderRadius: "30px" }}
-          >
-            <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
+            <div className="clearfix">
+              <div
+                className="float-right w-full max-w-[650px] min-w-[400px] max-h-[414px] mb-4 ml-[125px]"
+                style={{ borderRadius: "30px" }}
+              >
+                <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
+              </div>
+              <p className="text-[24px] leading-9">
+                {convertNewlinesToBreaks(props.long_description)}
+              </p>
+            </div>
           </div>
         </div>
       </div>
