@@ -3,20 +3,25 @@ import { SentMessageType } from "@/types/project";
 import { sendMessage } from "@/utils/firebaseFunctions";
 import { useForm } from "react-hook-form";
 import styles from "./ContactForm.module.css";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ContactForm() {
+  const queryClient = useQueryClient();
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors, isSubmitSuccessful },
   } = useForm<SentMessageType>();
 
   console.log(errors);
 
   const onSubmit = handleSubmit((data) => {
-    const messageData = { ...data, read: false };
-    sendMessage(messageData);
+    const messageData = { ...data, read: false, date: new Date() };
+    sendMessage(messageData).then(() =>
+      queryClient.invalidateQueries({ queryKey: ["messages"] })
+    );
     reset();
   });
   return (
@@ -166,6 +171,11 @@ export default function ContactForm() {
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </div>
+          {isSubmitSuccessful && (
+            <div className="px-3">
+              <p className={styles.success}>Message sent successfully</p>
+            </div>
+          )}
         </form>
       </div>
     </div>

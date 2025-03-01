@@ -23,6 +23,8 @@ export default function ProjectsList() {
     return <div>Error fetching projects</div>;
   }
 
+  const sortedData = data.toSorted((a, b) => a.order - b.order);
+
   return (
     <div
       className="responsive-padding flex flex-col gap-4 mt-12 lg:mt-0 py-12 transparent-background"
@@ -40,7 +42,7 @@ export default function ProjectsList() {
         </Link>
       </div>
       <div className="flex flex-col gap-14 mb-12">
-        {data.map((project: Project) => (
+        {sortedData.map((project: Project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>

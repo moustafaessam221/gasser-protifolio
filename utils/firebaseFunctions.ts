@@ -92,6 +92,19 @@ export async function changeFeatured(
   }
 }
 
+// edit project order by ID
+export async function editProjectOrder(
+  projectId: string | number,
+  order: number
+): Promise<void> {
+  try {
+    const projectDocRef = doc(db, "projects", String(projectId));
+    await updateDoc(projectDocRef, { order: order });
+  } catch (error) {
+    console.error("Error updating project order:", error);
+  }
+}
+
 // upload an img with the data
 export const uploadImage = async (file: File) => {
   const imageRef = ref(storage, `images/${file.name}`);

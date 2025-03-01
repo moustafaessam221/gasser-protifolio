@@ -28,3 +28,7 @@
 .error {
   @apply text-red-600 text-sm mt-2;
 }
+
+.success {
+  @apply text-green-600 text-xl mt-2;
+}

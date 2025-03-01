@@ -3,14 +3,14 @@ import {
   fetchProjects,
   deleteProjectById,
   changeFeatured,
+  editProjectOrder,
 } from "@/utils/firebaseFunctions";
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const ProjectsControl = () => {
-  const queryClient = useQueryClient(); // Access the QueryClient instance
+  const queryClient = useQueryClient();
 
-  // Fetch projects using React Query
   const {
     isLoading,
     data: projects,
@@ -21,7 +21,6 @@ const ProjectsControl = () => {
     staleTime: 1000 * 60 * 5,
   });
 
-  // Mutation for deleting a project
   const deleteMutation = useMutation({
     mutationFn: deleteProjectById,
     onSuccess: () => {
@@ -32,13 +31,22 @@ const ProjectsControl = () => {
     },
   });
 
-  // Mutation for changing featured status
   const changeFeaturedMutation = useMutation({
     mutationFn: changeFeatured,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
     },
   });
+
+  const { mutate: changeOrderMutation, isPending: isOrderLoading } =
+    useMutation<void, Error, { projectId: string | number; order: number }>({
+      mutationFn: ({ projectId, order }) => editProjectOrder(projectId, order),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["adminProjects"] });
+        queryClient.invalidateQueries({ queryKey: ["projects"] });
+        queryClient.invalidateQueries({ queryKey: ["projects", "featured"] });
+      },
+    });
 
   if (isLoading) {
     return <div className="text-center mt-4">Loading projects...</div>;
@@ -52,10 +60,12 @@ const ProjectsControl = () => {
     );
   }
 
+  const sortedByOrder = projects?.toSorted((a, b) => a.order - b.order);
+
   return (
     <div className="max-w-full w-screen mx-auto p-4">
       <div className="grid grid-cols-1 gap-6">
-        {projects?.map((project: Project) => (
+        {sortedByOrder?.map((project: Project) => (
           <div
             key={project.id}
             className="p-4 bg-white shadow-md rounded-lg flex flex-col md:flex-row items-center justify-between"
@@ -64,6 +74,19 @@ const ProjectsControl = () => {
               {project.title}
             </h1>
             <div className="flex gap-4">
+              <div>
+                <input
+                  type="number"
+                  value={project.order}
+                  className="w-16 text-center px-2 py-1 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-blue-500"
+                  onChange={(e) =>
+                    changeOrderMutation({
+                      projectId: project.id,
+                      order: Number(e.target.value),
+                    })
+                  }
+                />
+              </div>
               <button
                 onClick={() => changeFeaturedMutation.mutate(project.id)}
                 disabled={changeFeaturedMutation.status === "pending"}
@@ -91,6 +114,9 @@ const ProjectsControl = () => {
           </div>
         ))}
       </div>
+      {isOrderLoading && (
+        <div className="text-center mt-4 text-blue-500">Updating order...</div>
+      )}
     </div>
   );
 };

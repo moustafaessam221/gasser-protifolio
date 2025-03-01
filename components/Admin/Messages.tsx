@@ -30,10 +30,17 @@ const Messages = () => {
     setActiveMessageId((prevId) => (prevId === id ? null : id));
   };
 
+  // sort messages by date
+  const sortedMessages = [...data].sort((a, b) => {
+    const dateA = a.date.toDate().getTime();
+    const dateB = b.date.toDate().getTime();
+    return dateB - dateA;
+  });
+
   return (
     <div>
       <div className="flex flex-col gap-4 mb-12">
-        {data.map((message) => (
+        {sortedMessages.map((message) => (
           <div className="border-b border-gray-300 p-4" key={message.id}>
             <button
               className="flex justify-between items-center cursor-pointer w-full"
@@ -44,6 +51,13 @@ const Messages = () => {
               >
                 {message.subject}
               </h3>
+              <p className="font-workSans text-gray-600 text-sm">
+                {message.date.toDate().toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "2-digit",
+                  year: "numeric",
+                })}
+              </p>
               <BiArrowToBottom size={24} />
             </button>
             {activeMessageId === message.id && (

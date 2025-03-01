@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export type Project = {
   id: string | number;
   title: string | undefined;
@@ -7,6 +9,7 @@ export type Project = {
   device: string;
   bg_img: string;
   featured: boolean;
+  order: number;
 };
 
 export type Message = {
@@ -17,6 +20,7 @@ export type Message = {
   subject: string;
   message: string;
   read: boolean;
+  date: Timestamp;
 };
 
 export type SentMessageType = {

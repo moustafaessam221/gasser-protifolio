@@ -19,10 +19,12 @@ const FullProjects = () => {
     return <div>Error fetching projects</div>;
   }
 
+  const sortedByOrder = data.toSorted((a, b) => a.order - b.order);
+
   return (
     <div>
       <div className="flex flex-col gap-14 mb-12">
-        {data.map((project) => (
+        {sortedByOrder.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </div>

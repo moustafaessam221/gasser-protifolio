@@ -32,6 +32,7 @@ export default function AddProject() {
         device: deviceUrl,
         featured_Images: featuredImagesUrls,
         featured: data.featured,
+        order: 0,
       });
       console.log(data.short_description);
       alert("Project uploaded successfully!");
