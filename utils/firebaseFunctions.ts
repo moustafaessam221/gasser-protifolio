@@ -161,6 +161,22 @@ export async function deleteProjectById(
   }
 }
 
+// edit project by ID
+export async function editProjectById(
+  projectId: string | number,
+  projectData: Omit<Project, "id">
+) {
+  try {
+    const projectDocRef = doc(db, "projects", String(projectId));
+    await updateDoc(projectDocRef, projectData);
+  } catch (error) {
+    console.error("Error updating project:", error);
+  }
+}
+
+// update project with new images
+
+// MESSAGE------------------
 // fetch messages
 export async function fetchMessages(): Promise<Message[]> {
   try {

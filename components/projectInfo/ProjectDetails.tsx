@@ -1,11 +1,9 @@
 "use client";
-import React from "react";
-import ProjectHero from "./ProjectHero";
-// import FeaturedScreens from "./FeaturedScreens";
+import Loading from "@/app/loading";
 import { fetchProjectById } from "@/utils/firebaseFunctions";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "@/app/loading";
 import Carousel from "./Carousel";
+import ProjectHero from "./ProjectHero";
 
 type Props = {
   id: string;

@@ -7,6 +7,7 @@ import {
 } from "@/utils/firebaseFunctions";
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 
 const ProjectsControl = () => {
   const queryClient = useQueryClient();
@@ -95,6 +96,12 @@ const ProjectsControl = () => {
               {project.title}
             </h1>
             <div className="flex items-center gap-4">
+              <Link
+                href={`dashboard/edit/${project.id}`}
+                className="px-4 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+              >
+                Edit Project
+              </Link>
               <div>
                 <input
                   type="number"
