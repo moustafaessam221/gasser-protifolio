@@ -31,7 +31,7 @@ const ProjectHero = (props: Props) => {
               >
                 <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
               </div>
-              <p className="text-[24px] leading-9">
+              <p className="text-[20px] text-desciprtion leading-9">
                 {convertNewlinesToBreaks(props.long_description)}
               </p>
             </div>
@@ -54,7 +54,7 @@ const ProjectHero = (props: Props) => {
         >
           <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
         </div>
-        <p className="text-xl leading-9 mb-[64px]">
+        <p className="text-xl leading-9 text-desciprtion mb-[64px]">
           {convertNewlinesToBreaks(props.long_description)}
         </p>
       </div>

@@ -20,10 +20,10 @@ export default function ProjectCard({
         <h2 className="text-2xl xl:text-[32px] font-semibold">
           {project.title}
         </h2>
-        <p className="text-lg block lg:hidden xl:block lg:text-xl font-normal leading-7 lg:leading-9 lg:line-clamp-1 xl:line-clamp-none">
+        <p className="text-lg block lg:hidden xl:block lg:text-xl font-normal leading-7 lg:leading-9 lg:line-clamp-1 xl:line-clamp-none text-desciprtion">
           {convertNewlinesToBreaks(project.short_description)}
         </p>
-        <p className="text-lg hidden lg:block xl:hidden lg:text-xl font-normal">
+        <p className="text-lg text-desciprtion hidden lg:block xl:hidden lg:text-xl font-normal">
           {convertNewlinesToBreaks(trancatedText)}
         </p>
         <div className="font-semibold cursor-pointer hidden lg:block text-lg xl:text-2xl">

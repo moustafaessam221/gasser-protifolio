@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         notSelected: "#8D8D8C",
         contactMe: "#4D5566",
+        desciprtion: "#594F43",
       },
       dropShadow: {
         "custom-white": "0px 0px 120px rgba(255, 255, 255, 0.50)",
