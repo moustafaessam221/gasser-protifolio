@@ -4,6 +4,7 @@ import ProjectsControl from "@/components/Admin/ProjectsControl";
 import SignoutButton from "@/components/Admin/SignoutButton";
 import Messages from "./Messages";
 import EditBio from "./EditBio";
+import EditMainImg from "./EditMainImg";
 
 interface MainContentProps {
   activeComponent: string;
@@ -26,6 +27,8 @@ const MainContent: React.FC<MainContentProps> = ({
         return <Messages />;
       case "EditBio":
         return <EditBio />;
+      case "EditMainImg":
+        return <EditMainImg />;
       default:
         return null;
     }

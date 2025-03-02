@@ -15,6 +15,7 @@ import { Message, Project, SentMessageType } from "@/types/project";
 import {
   deleteObject,
   getDownloadURL,
+  listAll,
   ref,
   uploadBytes,
 } from "firebase/storage";
@@ -267,5 +268,44 @@ export async function updateBio(bio: string) {
     await updateDoc(bioRef, { bio: bio });
   } catch (error) {
     console.error("Error updating bio:", error);
+  }
+}
+
+// fetch the main image from bg_img folder in storage
+export async function fetchMainImage(): Promise<string> {
+  try {
+    const folderRef = ref(storage, "bg_img");
+    const result = await listAll(folderRef);
+
+    if (result.items.length === 0) {
+      throw new Error("No images found in the folder.");
+    }
+    const firstImageRef = result.items[0];
+    const url = await getDownloadURL(firstImageRef);
+    return url;
+  } catch (error) {
+    console.error("Error fetching image:", error);
+    throw error;
+  }
+}
+
+// upload image
+export async function uploadMainImage(file: File): Promise<string> {
+  try {
+    const folderRef = ref(storage, "bg_img");
+    const result = await listAll(folderRef);
+
+    for (const item of result.items) {
+      await deleteObject(item);
+    }
+
+    const imageRef = ref(storage, `bg_img/${file.name}`);
+    await uploadBytes(imageRef, file);
+
+    const url = await getDownloadURL(imageRef);
+    return url;
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
   }
 }

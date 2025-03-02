@@ -58,6 +58,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       </button>
 
       <button
+        onClick={() => setActiveComponent("EditMainImg")}
+        className={`${buttonTailwindStyles}`}
+        disabled={activeComponent === "EditMainImg"}
+      >
+        Edit Main Image
+      </button>
+      <button
         onClick={() => setActiveComponent("SignoutButton")}
         className={`${buttonTailwindStyles} mt-auto bg-red-500 hover:bg-red-600`}
         disabled={activeComponent === "SignoutButton"}

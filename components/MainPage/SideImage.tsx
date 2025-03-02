@@ -1,12 +1,30 @@
+"use client";
+import Loading from "@/app/loading";
+import { fetchMainImage } from "@/utils/firebaseFunctions";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 
 const SideImage = () => {
+  const { data, isPending, error } = useQuery({
+    queryKey: ["mainImage"],
+    queryFn: () => fetchMainImage(),
+  });
+
+  if (isPending) {
+    return <Loading />;
+  }
+
+  if (error) {
+    console.error("Error fetching image:", error);
+    return <div>Error fetching image</div>;
+  }
+
   return (
-    <div className="-z-50 absolute -top-[50px] -right-[0px] h-[1000px] w-full hidden lg:block image-move">
+    <div className="-z-50 absolute -top-[50px] -right-[0px] h-[1000px] w-full hidden lg:block">
       <Image
-        src="https://firebasestorage.googleapis.com/v0/b/car-price-prediction-919d9.appspot.com/o/bg_img%2FFrame%20138.svg?alt=media&token=18490ddc-f1d3-4ef3-9ca6-c3a251ec3081"
+        src={data}
         alt="Flying Pages"
-        className="w-full h-full object-cover "
+        className="w-full h-full object-cover image-move"
         fill
       />
     </div>
