@@ -31,7 +31,7 @@ export default function ProjectsList() {
       id="my-work"
     >
       <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-16 items-center mb-4">
-        <h1 className="text-xl lg:text-4xl font-semibold text-white font-eczar hover:text-yellow-500 hover:cursor-pointer hover:bg-black ">
+        <h1 className="text-xl lg:text-4xl font-semibold text-white font-eczar">
           Featured Work
         </h1>
         <Link
