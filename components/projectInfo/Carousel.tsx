@@ -64,6 +64,7 @@ export default function Carousel({
               src={slide}
               alt=""
               style={{
+                width: "auto",
                 objectFit: "cover",
                 height: "100%",
               }}
@@ -107,14 +108,14 @@ export default function Carousel({
           <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-[100]">
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-white text-2xl z-[101]"
+              className="absolute top-4 right-4 text-white  z-[101] cursor-pointer hover:text-gray-300 text-4xl"
             >
               &times;
             </button>
-            <div className="flex relative items-center justify-center">
+            <div className="flex items-center justify-center">
               <button
                 onClick={modalPrev}
-                className="p-1 absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white z-[102]"
+                className="p-1 absolute left-1 top-1/2 transform -translate-y-1/2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white z-[102]"
               >
                 <MdKeyboardArrowLeft size={40} />
               </button>
@@ -132,7 +133,7 @@ export default function Carousel({
               />
               <button
                 onClick={modalNext}
-                className="p-1 absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white z-[102]"
+                className="p-1 absolute right-1 top-1/2 transform -translate-y-1/2 rounded-full shadow bg-white/80 text-gray-800 hover:bg-white z-[102]"
               >
                 <MdKeyboardArrowRight size={40} />
               </button>
