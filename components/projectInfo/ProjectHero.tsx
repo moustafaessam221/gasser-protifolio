@@ -31,7 +31,7 @@ const ProjectHero = (props: Props) => {
               >
                 <ProjectTitleImg bgimg={props.bg_img} device={props.device} />
               </div>
-              <p className="text-[20px] text-desciprtion leading-9">
+              <p className="text-[20px] text-desciprtion leading-9 whitespace-pre-wrap">
                 {convertNewlinesToBreaks(props.long_description)}
               </p>
             </div>
