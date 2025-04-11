@@ -1,5 +1,11 @@
 import FullProjects from "@/components/work/FullProjects";
 
+export async function generateMetadata() {
+  return {
+    title: "Work | Gasser Design",
+  };
+}
+
 const page = () => {
   return (
     <div className="responsive-padding">

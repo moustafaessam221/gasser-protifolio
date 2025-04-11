@@ -43,6 +43,29 @@ export async function fetchProjectById(
     return null;
   }
 }
+
+// fetch project with name
+export async function fetchProjectByName(
+  name: string
+): Promise<Project | null> {
+  try {
+    const projectsRef = collection(db, "projects");
+    const q = query(projectsRef, where("title", "==", name));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      return null;
+    }
+    const projectData = {
+      id: querySnapshot.docs[0].id,
+      ...querySnapshot.docs[0].data(),
+    } as Project;
+    return projectData;
+  } catch (error) {
+    console.error("Error fetching project by name:", error);
+    return null;
+  }
+}
+
 // fetch projects with an optional limit
 export async function fetchProjects(maxProjects?: number): Promise<Project[]> {
   const projectsQuery = maxProjects

@@ -1,18 +1,21 @@
 "use client";
 import Loading from "@/app/loading";
-import { fetchProjectById } from "@/utils/firebaseFunctions";
+import { fetchProjectByName } from "@/utils/firebaseFunctions";
 import { useQuery } from "@tanstack/react-query";
 import Carousel from "./Carousel";
 import ProjectHero from "./ProjectHero";
+import { Project } from "@/types/project";
 
 type Props = {
-  id: string;
+  name: string;
+  initialData?: Project | null;
 };
 
 const ProjectDetails = (props: Props) => {
   const { data, isPending, error } = useQuery({
-    queryKey: ["project", props.id],
-    queryFn: () => fetchProjectById(String(props.id)),
+    queryKey: ["project", props.name],
+    queryFn: () => fetchProjectByName(String(props.name)),
+    initialData: props.initialData,
   });
 
   if (isPending) {

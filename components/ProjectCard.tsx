@@ -12,7 +12,7 @@ export default function ProjectCard({
 
   return (
     <Link
-      href={`/work/${project.id}`}
+      href={`/work/${project.title}`}
       key={project.id}
       className="flex flex-col-reverse lg:flex-row h-auto lg:max-h-[414px] w-full mx-auto justify-between mb-4 bg-white rounded-[10px] md:rounded-[20px] lg:rounded-[30px] font-workSans hover:drop-shadow-custom-white transition-all duration-300 overflow-hidden group"
     >
